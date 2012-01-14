@@ -10,7 +10,7 @@
         <td><%= task.description  %></td>
         <td><%= task.state %></td>
         <td><%= task.priority %></td>
-        <td><%= link_to "Edit", :action => 'edit' %></td>
+        <td><%= link_to "Edit", edit_list_task_path(@list,task) %></td>
         <td><%= link_to "Delete",[@list, task] , confirm: 'Are you sure?', method: :delete %></td>
       </tr>
    <% end %>

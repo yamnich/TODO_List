@@ -1,0 +1,21 @@
+<h1><%= @list.name%></h1>
+<table>
+  <% if @tasks.blank? %>
+    <p>There is no task in this list.</p> <br />
+    <p>Do you like to <%= link_to "Add", new_list_task_path(@list,@task) %> new one? </p>
+  <% else %>
+   <% @tasks.each do |task| %>
+      <tr>
+        <td><b> <%= task.name  %> </b> </td>
+        <td><%= task.description  %></td>
+        <td><%= task.state %></td>
+        <td><%= task.priority %></td>
+        <td><%= link_to "Edit", :action => 'edit' %></td>
+        <td><%= link_to "Delete",[@list, task] , confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+   <% end %>
+      <tr>
+       <td>Do you want to <%= link_to "Add", new_list_task_path(@list,@task)%> new task?</td>
+      </tr>
+  <% end %>
+</table>

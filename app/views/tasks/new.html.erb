@@ -1,0 +1,29 @@
+<h1>Adding new task</h1>
+<%= form_for([@list,@task]) do |f| %>
+
+   <div class="field">
+    <%= f.label :name %> <br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %> <br />
+    <%= f.text_field :description %>
+  </div>
+
+   <div class="field">
+    <%= f.label :state %> <br />
+    <%= f.text_field :state %>
+  </div>
+
+
+   <div class="field">
+    <%= f.label :priority %> <br />
+    <%= f.text_field :priority %>
+  </div>
+
+  <div class="actions">
+
+    <%= f.submit "New" %>
+  </div>
+<% end %>

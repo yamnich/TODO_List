@@ -1,15 +1,26 @@
 TodoList::Application.routes.draw do
+
+  get "pages/home"
+
+  get "pages/contact"
+
+  get "pages/about"
+
   get "tasks/new"
-
   get "lists/new"
+  get "users/index"
 
-  resources :lists do
-   resources :tasks
+  resources :users do
+    resources :lists do
+      resources :tasks
     end
-  root :to => "lists#index"
+  end
+  match '/users', :to => "users#index"
 
-  match '/lists', :to => "lists#destroy"
-  match '/lists/:list_id/tasks/edit', :to => "tasks#edit"
+  root :to => "pages#home"
+
+
+
   # match '/lists/:list_id/tasks/:id', :to => "tasks#destroy"
   #  match '/lists/:list_id/tasks/:id/new', :to => "tasks#create"
   # The priority is based upon order of creation:

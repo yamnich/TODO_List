@@ -1,0 +1,6 @@
+<h1><%= @user.name%></h1>
+
+
+      <td><%=  link_to "Show", user_lists_path(@user)%></td>
+      <td><%=  link_to "Edit", edit_user_path(@user)%></td>
+      <td><%=  link_to "Delete", @user, confirm: 'Are you sure?', method: :delete %></td>

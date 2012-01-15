@@ -1,8 +1,10 @@
-<h1><%= @list.name%></h1>
+<h1><%= @user.name%></h1>
+<h2><%= @list.name%></h2>
 <table>
+
   <% if @tasks.blank? %>
     <p>There is no task in this list.</p> <br />
-    <p>Do you like to <%= link_to "Add", new_list_task_path(@list,@task) %> new one? </p>
+    <p>Do you like to <%= link_to "Add", new_user_list_task_path(@user,@list,@task) %> new one? </p>
   <% else %>
    <% @tasks.each do |task| %>
       <tr>
@@ -10,12 +12,12 @@
         <td><%= task.description  %></td>
         <td><%= task.state %></td>
         <td><%= task.priority %></td>
-        <td><%= link_to "Edit", edit_list_task_path(@list,task) %></td>
-        <td><%= link_to "Delete",[@list, task] , confirm: 'Are you sure?', method: :delete %></td>
+        <td><%= link_to "Edit", edit_user_list_task_path(@user, @list,task) %></td>
+        <td><%= link_to "Delete",[@user, @list, task] , confirm: 'Are you sure?', method: :delete %></td>
       </tr>
    <% end %>
       <tr>
-       <td>Do you want to <%= link_to "Add", new_list_task_path(@list,@task)%> new task?</td>
+       <td>Do you want to <%= link_to "Add", new_user_list_task_path(@user,@list,@task)%> new task?</td>
       </tr>
   <% end %>
 </table>

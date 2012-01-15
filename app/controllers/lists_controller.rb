@@ -2,50 +2,58 @@ class ListsController < ApplicationController
  # respond_to :html, :xml, :js
 
   def new
-     @title = "new_list"
-     @list = List.new
+    @title = "New List"
+    @user = User.find(params[:user_id])
+    @list = @user.lists.build
+    @button_name = "New"
   end
 
   def index
-     @title = "index_list"
-    #respond_with(@lists=List.all)
-    @lists = List.all
+    @title = "Index_List"
+    @user = User.find(params[:user_id])
+    @lists = @user.lists
   end
 
   def show
-    @title = "show list"
+    @title = "Show User"
     @list = List.find(params[:id])
   end
 
   def edit
-    @title = "edit list"
-    @list = List.find(params[:id])
-
+    @title = "Edit User"
+    @user= User.find(params[:user_id])
+    @list = @user.lists.find(params[:id])
+    @button_name = "Update"
   end
 
   def create
-    @list = List.new(params[:list])
+    @title = "Create User"
+    @user = User.find(params[:user_id])
+    @list = @user.lists.build(params[:list])
     if @list.save
-      redirect_to list_tasks_path(@list)
+      flash[:notice] = 'List was successfully created'
+      redirect_to user_lists_path(@user)
     else
-      @title = "Error"
       render 'new'
     end
   end
 
+
   def update
-    @list = List.find(params[:id])
-       if @list.update_attributes(params[:list])
-         redirect_to lists_path
-       else
-         @title = "Error"
-         render 'edit'
-       end
+    @title = "Update User"
+    @user = User.find(params[:user_id])
+    @list = @user.lists.find(params[:id])
+    if @list.update_attributes(params[:list])
+      redirect_to user_lists_path(@user)
+    else
+      render 'edit'
+    end
   end
 
 
   def destroy
-    @list = List.find(params[:id])
+    @user = User.find(params[:user_id])
+    @list = @user.lists.find(params[:id])
     @list.destroy
 
     flash[:success] = "List is destroyed."
@@ -53,7 +61,7 @@ class ListsController < ApplicationController
     #  format.html { redirect_to lists_path }
   #    format.json { head :ok }
   #  end
-    redirect_to lists_path
+    redirect_to user_lists_path(@user)
   end
 
 end

@@ -1,9 +1,3 @@
-class List < ActiveRecord::Base
-  attr_accessible :name, :description
- # attr_accessor :name, :description
-
-  has_many :tasks
-end
 
 # == Schema Information
 #
@@ -17,4 +11,14 @@ end
 #  created_at  :datetime
 #  updated_at  :datetime
 #
+
+class List < ActiveRecord::Base
+  attr_accessible :name, :description
+
+  has_many :tasks, :dependent => :destroy
+  belongs_to :user
+  validates :name, :presence => true, :uniqueness => true
+
+
+end
 

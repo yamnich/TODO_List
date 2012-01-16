@@ -1,5 +1,7 @@
 TodoList::Application.routes.draw do
 
+  get "sessions/new"
+
   get "pages/home"
 
   get "pages/contact"
@@ -15,7 +17,13 @@ TodoList::Application.routes.draw do
       resources :tasks
     end
   end
+
+  resources :sessions
   match '/users', :to => "users#index"
+  match '/signup', :to => 'users#new'
+
+  match '/signin', :to =>  'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
 
   root :to => "pages#home"
 

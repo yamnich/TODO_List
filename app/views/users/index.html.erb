@@ -11,13 +11,16 @@
       <tr>
         <td class title="main">
           <%= gravatar_for user %>
-          <%=  user.name %>
+          <%=  link_to user.name, user %>
          </td>
       </tr>
       <tr>
       <td><%=  link_to "Show", user_lists_path(user, @list)%></td>
-      <td><%=  link_to "Edit", edit_user_path(user)%></td>
-      <td><%=  link_to "Delete", user, confirm: 'Are you sure?', method: :delete %></td>
+      <td>
+         <% if current_user.admin? %>
+         <%=  link_to "Delete", user, confirm: 'Are you sure?', method: :delete,title: "Delete #{user.name}"  %>
+         <% end %>
+       </td>
       </tr>
     <% end %>
       </table>

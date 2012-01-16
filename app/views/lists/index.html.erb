@@ -1,18 +1,21 @@
-<h1>Existing lists</h1>
-<% if @user.lists.blank? %>
-  <p> There is no list. </p><br />
-  <p>Do you want to   <%=  link_to "Add", new_user_list_path(@user)%> new one?</p>
-<% else %>
-    <table>
-  <% @user.lists.each do |list|           %>
-    <tr>
-    <td><%=  list.name %></td>
-    <td><%=  list.description %></td>
-    <td><%=  link_to "Show", user_list_tasks_path(@user, list)%></td>
-    <td><%=  link_to "Edit", edit_user_list_path(@user, list)%></td>
-    <td><%=  link_to "Delete", [@user,list], confirm: 'Are you sure?', method: :delete %></td>
-    </tr>
-  <% end %>
+ <h1>
+    <%= gravatar_for @user %>
+    <%= @user.name %>
+ </h1>
+ <% if @user.lists.blank? %>
+   <p> There is no list. </p><br />
+   <p>Do you want to   <%=  link_to "Add", new_user_list_path(@user)%> new one?</p>
+ <% else %>
+   <table>
+     <% @user.lists.each do |list|           %>
+        <tr>
+        <td><%=  list.name %></td>
+        <td><%=  list.description %></td>
+        <td><%=  link_to "Show", user_list_tasks_path(@user, list)%></td>
+        <td><%=  link_to "Edit", edit_user_list_path(@user, list)%></td>
+        <td><%=  link_to "Delete", [@user,list], confirm: 'Are you sure?', method: :delete %></td>
+        </tr>
+      <% end %>
     </table>
      <p>Do you want to   <%=  link_to "Add", new_user_list_path(@user)%> new one?</p>
 <% end %>

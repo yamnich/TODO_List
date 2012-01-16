@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   def new
        @title = "New User"
        @user = User.new
-       @button_name = "New"
+       @button_name = "Sign up"
     end
 
     def index
@@ -11,8 +11,9 @@ class UsersController < ApplicationController
     end
 
     def show
-      @title = "Show User"
       @user = User.find(params[:id])
+      @title = @user.name
+      redirect_to user_lists_path(@user)
     end
 
     def edit
@@ -22,11 +23,12 @@ class UsersController < ApplicationController
     end
 
     def create
-      @title = "Create User"
       @user = User.new(params[:user])
       if @user.save
-        redirect_to @user
+        flash[:success] = "Welcome!"
+        redirect_to user_lists_path(@user)
       else
+        @title = "Sign up"
         render 'new'
       end
     end

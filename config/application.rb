@@ -7,6 +7,7 @@ if defined?(Bundler)
   Bundler.require(*Rails.groups(:assets => %w(development test)))
   # If you want your assets lazily compiled in production, use this line
   # Bundler.require(:default, :assets, Rails.env)
+  Bundler.require(:default, Rails.env) if defined?(Bundler)
 end
 
 module TodoList
@@ -37,7 +38,7 @@ module TodoList
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
+    config.filter_parameters += [:password, :secret_code]
 
     # Enable the asset pipeline
     config.assets.enabled = true

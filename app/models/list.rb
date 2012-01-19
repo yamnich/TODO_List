@@ -13,11 +13,13 @@
 #
 
 class List < ActiveRecord::Base
-  attr_accessible :name, :description
+ # attr_accessor :user_id, :project_id
 
-  has_many :tasks, :dependent => :destroy
+  has_many :tasks, dependent:  :destroy
   belongs_to :user
-  validates :name, :presence => true, :uniqueness => true
+  belongs_to :project
+ # attr_accessible :name, :description, :user_id, :project_id
+  validates :name, presence: true #, uniqueness:  {:case_sensitive => false}
 
 
 end

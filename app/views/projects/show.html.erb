@@ -1,0 +1,18 @@
+<h1><%= @user.name%></h1>
+<h2><%= @project.name%></h2>
+
+<table>
+   <% @lists.each do |list| %>
+      <tr >
+        <td><b> <%= list.name  %> </b> </td>
+        <td><%= list.description  %></td>
+      </tr>
+      <tr>
+        <td><%= link_to "Edit", edit_user_project_list_path(@user,@project, list) %></td>
+        <td><%= link_to "Delete",[@user, @project, list] , confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+   <% end %>
+      <tr>
+       <td>Do you want to <%= link_to "Add", new_user_project_list_path(@user,@project,@list)%> new task?</td>
+      </tr>
+</table>

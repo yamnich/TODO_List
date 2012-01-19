@@ -1,6 +1,6 @@
 <%= form_for([@user, @list,@task]) do |f| %>
-   <%= render 'shared/error_messages', :object => f.object %>
-   <div class="field">
+ <%= render 'shared/error_messages', :object => f.object %>
+    <div class="field">
     <%= f.label :name %> <br />
     <%= f.text_field :name %>
   </div>
@@ -12,13 +12,13 @@
 
    <div class="field">
     <%= f.label :state %> <br />
-    <%= f.text_field :state %>
+    <%= f.check_box :state,{}, "Done", "In work" %>
   </div>
 
 
    <div class="field">
     <%= f.label :priority %> <br />
-    <%= f.text_field :priority %>
+    <%= f.select :priority, 1..5 %>
   </div>
 
   <div class="actions">

@@ -13,7 +13,13 @@ class TasksController < ApplicationController
     @title = "index_task"
     @user=User.find(params[:user_id])
     @list= @user.lists.find(params[:list_id])
-    @tasks = @list.tasks
+    if params[:state] == "done"
+      @tasks = @list.tasks.where("state = 'Done'")
+    elsif params[:state] == "in_work"
+      @tasks = @list.tasks.where("state = 'In work'")
+    else
+      @tasks = @list.tasks
+    end
   end
 
   def edit
@@ -52,13 +58,24 @@ class TasksController < ApplicationController
     @list = @user.lists.find(params[:list_id])
     @task = @list.tasks.find(params[:id])
     @task.destroy
-
     flash[:success] = "Task is destroyed."
-   # respond_to do |format|
-    #  format.html { redirect_to lists_path }
-  #    format.json { head :ok }
-  #  end
     redirect_to user_list_tasks_path
   end
+
+  def change_state
+    @user = User.find(params[:user_id])
+    @list = @user.lists.find(params[:list_id])
+    @task = @list.tasks.find(params[:id])
+    if  @task.state == "Done"
+    @task.state = "In work"
+    else @task.state = "Done"
+    end
+    if @task.update_attributes(params[:task])
+      redirect_to user_list_tasks_path(@user, @list)
+    else
+      redirect_to user_list_tasks_path(@user, @list)
+    end
+  end
+
 
 end

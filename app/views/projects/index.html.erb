@@ -1,0 +1,24 @@
+ <h1>
+    <%= gravatar_for @user %>
+    <%= link_to @user.name, user_path(@user) %>
+ </h1>
+ <% if @user.projects.blank? %>
+   <p> There is no project. </p><br />
+   <p>Do you want to   <%=  link_to "Add", new_user_project_path(@user)%> new one?</p>
+ <% else %>
+   <table>
+     <tr>
+      <td><%=  link_to "Lists", user_lists_path(@user) %></td>
+     </tr>
+     <tr></tr>
+     <% @user.projects.each do |project|           %>
+        <tr>
+        <td><%=  link_to project.name, user_project_lists_path(@user, project) %></td>
+        <td><%=  project.description %></td>
+        <td><%=  link_to "Edit", edit_user_project_path(@user, project)%></td>
+        <td><%=  link_to "Delete", [@user, project], confirm: 'Are you sure?', method: :delete %></td>
+        </tr>
+      <% end %>
+    </table>
+     <p>Do you want to   <%=  link_to "Add", new_user_project_path(@user)%> new one?</p>
+<% end %>

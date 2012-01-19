@@ -11,10 +11,24 @@ TodoList::Application.routes.draw do
   get "tasks/new"
   get "lists/new"
   get "users/index"
-
+  match '/users/:user_id/lists/:list_id/tasks/:state' => 'tasks#index', state: /(done|in_work)/
   resources :users do
     resources :lists do
-      resources :tasks
+      resources :tasks do
+      member do
+        get 'change_state'
+      end
+     end
+    end
+
+    resources :projects do
+      resources :lists do
+        resources :tasks do
+          member do
+            get 'change_state'
+          end
+        end
+      end
     end
   end
 

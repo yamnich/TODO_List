@@ -1,5 +1,5 @@
 <%= form_for(@user) do |f| %>
-   <%= render 'shared/error_messages', :object => f.object %>
+    <%= render 'shared/error_messages', :object => f.object%>
     <div class="field">
       <%= f.label :name %><br />
       <%= f.text_field :name %>
@@ -11,7 +11,7 @@
     </div>
 
     <div class="field">
-      <%= f.label :password %>
+      <%= f.label :password %> <br />
       <%= f.password_field  :password%>
     </div>
 

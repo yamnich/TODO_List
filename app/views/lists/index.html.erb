@@ -1,21 +1,32 @@
  <h1>
     <%= gravatar_for @user %>
     <%= @user.name %>
+
  </h1>
- <% if @user.lists.blank? %>
+    <% if !(@project.blank?)  %>
+  <p> <% @project.name %>   </p>
+      <tr>
+      <td><%=  link_to "Lists", user_lists_path(@user) %></td>
+     </tr>
+       <% end%>
+ <% if @lists.blank? %>
    <p> There is no list. </p><br />
-   <p>Do you want to   <%=  link_to "Add", new_user_list_path(@user)%> new one?</p>
  <% else %>
+
    <table>
-     <% @user.lists.each do |list|           %>
+     <% @lists.each do |list|%>
         <tr>
-        <td><%=  list.name %></td>
+        <td><%=  link_to list.name,user_list_tasks_path(@user, list) %></td>
         <td><%=  list.description %></td>
-        <td><%=  link_to "Show", user_list_tasks_path(@user, list)%></td>
         <td><%=  link_to "Edit", edit_user_list_path(@user, list)%></td>
         <td><%=  link_to "Delete", [@user,list], confirm: 'Are you sure?', method: :delete %></td>
         </tr>
       <% end %>
     </table>
-     <p>Do you want to   <%=  link_to "Add", new_user_list_path(@user)%> new one?</p>
-<% end %>
+  <% end %>
+     <p>Do you want to
+    <%= if @project.nil?
+            link_to "Add",  new_user_list_path(@user)
+        else
+         link_to "Add",  new_user_project_list_path(@user, @project) end %>
+     new one?</p>

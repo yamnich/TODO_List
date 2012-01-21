@@ -1,0 +1,64 @@
+                       sessions_new GET    /sessions/new(.:format)                                                              {:controller=>"sessions", :action=>"new"}
+                         pages_home GET    /pages/home(.:format)                                                                {:controller=>"pages", :action=>"home"}
+                      pages_contact GET    /pages/contact(.:format)                                                             {:controller=>"pages", :action=>"contact"}
+                        pages_about GET    /pages/about(.:format)                                                               {:controller=>"pages", :action=>"about"}
+                          tasks_new GET    /tasks/new(.:format)                                                                 {:controller=>"tasks", :action=>"new"}
+                          lists_new GET    /lists/new(.:format)                                                                 {:controller=>"lists", :action=>"new"}
+                        users_index GET    /users/index(.:format)                                                               {:controller=>"users", :action=>"index"}
+                                           /users/:user_id/lists/:list_id/tasks/:state(.:format)                                {:state=>/(done|in_work)/, :controller=>"tasks", :action=>"index"}
+                     following_user GET    /users/:id/following(.:format)                                                       {:action=>"following", :controller=>"users"}
+                     followers_user GET    /users/:id/followers(.:format)                                                       {:action=>"followers", :controller=>"users"}
+        change_state_user_list_task GET    /users/:user_id/lists/:list_id/tasks/:id/change_state(.:format)                      {:action=>"change_state", :controller=>"tasks"}
+                    user_list_tasks GET    /users/:user_id/lists/:list_id/tasks(.:format)                                       {:action=>"index", :controller=>"tasks"}
+                                    POST   /users/:user_id/lists/:list_id/tasks(.:format)                                       {:action=>"create", :controller=>"tasks"}
+                 new_user_list_task GET    /users/:user_id/lists/:list_id/tasks/new(.:format)                                   {:action=>"new", :controller=>"tasks"}
+                edit_user_list_task GET    /users/:user_id/lists/:list_id/tasks/:id/edit(.:format)                              {:action=>"edit", :controller=>"tasks"}
+                     user_list_task GET    /users/:user_id/lists/:list_id/tasks/:id(.:format)                                   {:action=>"show", :controller=>"tasks"}
+                                    PUT    /users/:user_id/lists/:list_id/tasks/:id(.:format)                                   {:action=>"update", :controller=>"tasks"}
+                                    DELETE /users/:user_id/lists/:list_id/tasks/:id(.:format)                                   {:action=>"destroy", :controller=>"tasks"}
+                         user_lists GET    /users/:user_id/lists(.:format)                                                      {:action=>"index", :controller=>"lists"}
+                                    POST   /users/:user_id/lists(.:format)                                                      {:action=>"create", :controller=>"lists"}
+                      new_user_list GET    /users/:user_id/lists/new(.:format)                                                  {:action=>"new", :controller=>"lists"}
+                     edit_user_list GET    /users/:user_id/lists/:id/edit(.:format)                                             {:action=>"edit", :controller=>"lists"}
+                          user_list GET    /users/:user_id/lists/:id(.:format)                                                  {:action=>"show", :controller=>"lists"}
+                                    PUT    /users/:user_id/lists/:id(.:format)                                                  {:action=>"update", :controller=>"lists"}
+                                    DELETE /users/:user_id/lists/:id(.:format)                                                  {:action=>"destroy", :controller=>"lists"}
+change_state_user_project_list_task GET    /users/:user_id/projects/:project_id/lists/:list_id/tasks/:id/change_state(.:format) {:action=>"change_state", :controller=>"tasks"}
+            user_project_list_tasks GET    /users/:user_id/projects/:project_id/lists/:list_id/tasks(.:format)                  {:action=>"index", :controller=>"tasks"}
+                                    POST   /users/:user_id/projects/:project_id/lists/:list_id/tasks(.:format)                  {:action=>"create", :controller=>"tasks"}
+         new_user_project_list_task GET    /users/:user_id/projects/:project_id/lists/:list_id/tasks/new(.:format)              {:action=>"new", :controller=>"tasks"}
+        edit_user_project_list_task GET    /users/:user_id/projects/:project_id/lists/:list_id/tasks/:id/edit(.:format)         {:action=>"edit", :controller=>"tasks"}
+             user_project_list_task GET    /users/:user_id/projects/:project_id/lists/:list_id/tasks/:id(.:format)              {:action=>"show", :controller=>"tasks"}
+                                    PUT    /users/:user_id/projects/:project_id/lists/:list_id/tasks/:id(.:format)              {:action=>"update", :controller=>"tasks"}
+                                    DELETE /users/:user_id/projects/:project_id/lists/:list_id/tasks/:id(.:format)              {:action=>"destroy", :controller=>"tasks"}
+                 user_project_lists GET    /users/:user_id/projects/:project_id/lists(.:format)                                 {:action=>"index", :controller=>"lists"}
+                                    POST   /users/:user_id/projects/:project_id/lists(.:format)                                 {:action=>"create", :controller=>"lists"}
+              new_user_project_list GET    /users/:user_id/projects/:project_id/lists/new(.:format)                             {:action=>"new", :controller=>"lists"}
+             edit_user_project_list GET    /users/:user_id/projects/:project_id/lists/:id/edit(.:format)                        {:action=>"edit", :controller=>"lists"}
+                  user_project_list GET    /users/:user_id/projects/:project_id/lists/:id(.:format)                             {:action=>"show", :controller=>"lists"}
+                                    PUT    /users/:user_id/projects/:project_id/lists/:id(.:format)                             {:action=>"update", :controller=>"lists"}
+                                    DELETE /users/:user_id/projects/:project_id/lists/:id(.:format)                             {:action=>"destroy", :controller=>"lists"}
+                      user_projects GET    /users/:user_id/projects(.:format)                                                   {:action=>"index", :controller=>"projects"}
+                                    POST   /users/:user_id/projects(.:format)                                                   {:action=>"create", :controller=>"projects"}
+                   new_user_project GET    /users/:user_id/projects/new(.:format)                                               {:action=>"new", :controller=>"projects"}
+                  edit_user_project GET    /users/:user_id/projects/:id/edit(.:format)                                          {:action=>"edit", :controller=>"projects"}
+                       user_project GET    /users/:user_id/projects/:id(.:format)                                               {:action=>"show", :controller=>"projects"}
+                                    PUT    /users/:user_id/projects/:id(.:format)                                               {:action=>"update", :controller=>"projects"}
+                                    DELETE /users/:user_id/projects/:id(.:format)                                               {:action=>"destroy", :controller=>"projects"}
+                              users GET    /users(.:format)                                                                     {:action=>"index", :controller=>"users"}
+                                    POST   /users(.:format)                                                                     {:action=>"create", :controller=>"users"}
+                           new_user GET    /users/new(.:format)                                                                 {:action=>"new", :controller=>"users"}
+                          edit_user GET    /users/:id/edit(.:format)                                                            {:action=>"edit", :controller=>"users"}
+                               user GET    /users/:id(.:format)                                                                 {:action=>"show", :controller=>"users"}
+                                    PUT    /users/:id(.:format)                                                                 {:action=>"update", :controller=>"users"}
+                                    DELETE /users/:id(.:format)                                                                 {:action=>"destroy", :controller=>"users"}
+                           sessions POST   /sessions(.:format)                                                                  {:action=>"create", :controller=>"sessions"}
+                        new_session GET    /sessions/new(.:format)                                                              {:action=>"new", :controller=>"sessions"}
+                            session DELETE /sessions/:id(.:format)                                                              {:action=>"destroy", :controller=>"sessions"}
+                      relationships POST   /relationships(.:format)                                                             {:action=>"create", :controller=>"relationships"}
+                       relationship DELETE /relationships/:id(.:format)                                                         {:action=>"destroy", :controller=>"relationships"}
+                                           /users(.:format)                                                                     {:controller=>"users", :action=>"index"}
+                             signup        /signup(.:format)                                                                    {:controller=>"users", :action=>"new"}
+                             signin        /signin(.:format)                                                                    {:controller=>"sessions", :action=>"new"}
+                            signout        /signout(.:format)                                                                   {:controller=>"sessions", :action=>"destroy"}
+                               root        /                                                                                    {:controller=>"pages", :action=>"home"}

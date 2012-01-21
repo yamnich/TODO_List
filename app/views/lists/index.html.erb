@@ -1,32 +1,49 @@
  <h1>
-    <%= gravatar_for @user %>
-    <%= @user.name %>
-
+   <%= gravatar_for @user%>
+   <%= @user.name %>
  </h1>
-    <% if !(@project.blank?)  %>
-  <p> <% @project.name %>   </p>
-      <tr>
-      <td><%=  link_to "Lists", user_lists_path(@user) %></td>
-     </tr>
-       <% end%>
+
+
+ <% if !(@project.nil?)  %>
+   <p> <%= @project.name %>  </p>
+   <tr>
+     <td><%=  link_to "Users lists", user_lists_path(@user) %></td>
+   </tr>
+ <% else %>
+   <tr>
+     <td><%=  link_to "Users projects", user_projects_path(@user) %></td>
+   </tr>
+ <%end%>
+
  <% if @lists.blank? %>
    <p> There is no list. </p><br />
  <% else %>
 
    <table>
      <% @lists.each do |list|%>
-        <tr>
-        <td><%=  link_to list.name,user_list_tasks_path(@user, list) %></td>
-        <td><%=  list.description %></td>
-        <td><%=  link_to "Edit", edit_user_list_path(@user, list)%></td>
-        <td><%=  link_to "Delete", [@user,list], confirm: 'Are you sure?', method: :delete %></td>
+       <% if !(@project.nil?) %>
+         <tr>
+           <td><%=  link_to list.name,user_project_list_tasks_path(@user,@project, list) %></td>
+           <td><%=  list.description %></td>
+           <td><%=  link_to "Edit", edit_user_project_list_path(@user,@project, list)%></td>
+           <td><%=  link_to "Delete", [@user,@project,list], confirm: 'Are you sure?', method: :delete %></td>
+         </tr>
+       <% else %>
+         <tr>
+           <td><%=  link_to list.name,user_list_tasks_path(@user, list) %></td>
+           <td><%=  list.description %></td>
+           <td><%=  link_to "Edit", edit_user_list_path(@user, list)%></td>
+           <td><%=  link_to "Delete", [@user,list], confirm: 'Are you sure?', method: :delete %></td>
         </tr>
-      <% end %>
-    </table>
-  <% end %>
-     <p>Do you want to
-    <%= if @project.nil?
-            link_to "Add",  new_user_list_path(@user)
-        else
-         link_to "Add",  new_user_project_list_path(@user, @project) end %>
-     new one?</p>
+       <% end %>
+     <% end %>
+   </table>
+ <% end %>
+
+ <% if @project.nil? %>
+   <%= link_to "Add the list", new_user_list_path(@user) %>
+ <% else %>
+   <%= link_to "Add the list to the project", new_user_project_list_path(@user, @project)%>
+ <% end %>
+
+

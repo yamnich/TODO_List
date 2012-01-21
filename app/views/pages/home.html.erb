@@ -1,11 +1,17 @@
-<DOCTYPE html>
-<html>
-  <head>
-    <title><%= @title %></title>
-  </head>
-  <body>
-    <h1>TODO List project</h1>
-   </body>
-   <%= link_to "Sign up now!", '#', :class => "signup_button round" %>
-</html>
-</DOCTYPE>
+ <% if signed_in? %>
+   <table class = "front" summary = "For signed-n users">
+     <tr>
+       <td class = "sidebar round">
+         <%= render 'shared/user_info' %>
+         <%= render 'shared/stats' %>
+       </td>
+     </tr>
+   </table>
+
+ <% else %>
+
+<h1>TODO List</h1>
+
+<%=  link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+
+<% end %>

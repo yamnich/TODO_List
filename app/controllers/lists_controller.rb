@@ -3,9 +3,9 @@ class ListsController < ApplicationController
   def new
     @title = "New List"
     @user = User.find(params[:user_id])
-   if !(params[:project_id].nil?)
+    if !(params[:project_id].nil?)
       @project = @user.projects.find(params[:project_id])
-      @list=@project.lists.build
+      @list = @project.lists.build
     else
       @list = @user.lists.build
     end
@@ -14,10 +14,10 @@ class ListsController < ApplicationController
 
   def index
     @title = "Index List"
-    @user = User.find_by_id(params[:user_id])
-    if (params[:project_id])
+    @user = User.find(params[:user_id])
+    if !(params[:project_id].nil?)
       @project = @user.projects.find(params[:project_id])
-      @lists = @project.lists.all
+      @lists = @project.lists
     else
       @lists = @user.lists
     end
@@ -29,7 +29,7 @@ class ListsController < ApplicationController
 
     if !(params[:project_id].nil?)
       @project = @user.projects.find(params[:project_id])
-      @list=@projects.lists.find(params[:id])
+      @list=@project.lists.find(params[:id])
     else
        @list =@user.lists.find(params[:id])
     end
@@ -41,7 +41,7 @@ class ListsController < ApplicationController
 
     if !(params[:project_id].nil?)
       @project = @user.projects.find(params[:project_id])
-      @list=@projects.lists.find(params[:id])
+      @list=@project.lists.find(params[:id])
     else
        @list =@user.lists.find(params[:id])
     end
@@ -53,9 +53,9 @@ def update
     @user = User.find(params[:user_id])
     if !(params[:project_id].nil?)
       @project = @user.projects.find(params[:project_id])
-      @list=@projects.lists.find(params[:id])
+      @list=@project.lists.find(params[:id])
     else
-       @list =@user.lists.find(params[:id])
+       @list = @user.lists.find(params[:id])
     end
     if @list.update_attributes(params[:list])
       if !(params[:project_id].nil?)
@@ -99,7 +99,7 @@ def update
     @user = User.find(params[:user_id])
     if !(params[:project_id].nil?)
       @project = @user.projects.find(params[:project_id])
-      @list=@projects.lists.find(params[:id])
+      @list=@project.lists.find(params[:id])
     else
        @list =@user.lists.find(params[:id])
     end

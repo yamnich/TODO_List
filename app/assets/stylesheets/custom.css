@@ -1,28 +1,62 @@
+.top{
+   width: 710px;
+}
+
+.main_menu{
+    background: #fff;
+    padding: 5px, 5px, 5px, 5px;
+    margin-right: 10px;
+    }
+.logo{
+
+}
 .container {
   width: 710px;
+  background: #bbbcd7;
+  padding-bottom: 50px;
 }
 
 body{
-    background: #cff;
-}
-header {
-    padding-top:20px;
-}
-
-header img {
-    padding:  1em;
     background: #fff;
 }
 
-section {
-   margin-top: 1em;
-   font-size: 120%;
-    padding: 20px;
+.sidebar{
     background: #fff;
+    width: 150px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-left: 3px;
+    margin-top: 20px;
+    float: left;
+
 }
 
-section h1 {
-  font-size: 200%;
+.content{
+    margin-top: 20px;
+    margin-left: 10px;
+    padding-left: 85px;
+
+    margin-bottom: 70px;
+    width: 500px;
+
+}
+
+.sign{
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+.title{
+    background: #c5013d;
+    color:#fff;
+}
+
+.user_name{
+    font-size: 200%;
+    color: #222;
 }
 /*Links*/
 a {
@@ -72,7 +106,16 @@ nav ul li a:visited {
 nav ul li a:hover {
     text-decoration: underline;
 }
+.footer{
+  width:710px;
+  margin: 0 auto;
+  text-align: center;
+    background-color: #e8e3d8;
+}
 
+.footer nav{
+    background: #e8e3d8;
+}
 /* Sing up button */
 a.signup_button {
     margin-left:  auto;
@@ -92,16 +135,9 @@ a.signup_button {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
+    background: #fff;
 }
 /* Footer */
-
-footer {
-    text-align: center;
-    margin-top: 10px;
-    width: 710px;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 footer nav {
     float: none;
@@ -147,7 +183,7 @@ td.sidebar{
 }
 
 #error_explanation {
-    width: 400px;
+    width: 300px;
     border:  2px solid red;
     padding:  7px;
     padding-bottom: 12px;

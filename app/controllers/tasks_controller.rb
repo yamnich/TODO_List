@@ -16,7 +16,7 @@ class TasksController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
-    p_id=params[:project_id]
+
     if !(params[:project_id].nil?)
       @project = @user.projects.find(params[:project_id])
       @list=@project.lists.find(params[:list_id])
@@ -112,7 +112,7 @@ class TasksController < ApplicationController
     @user = User.find(params[:user_id])
     if !(params[:project_id].nil?)
       @project = @user.projects.find(params[:project_id])
-      @list=@projects.lists.find(params[:list_id])
+      @list=@project.lists.find(params[:list_id])
     else
        @list =@user.lists.find(params[:list_id])
     end

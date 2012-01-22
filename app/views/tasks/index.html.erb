@@ -1,4 +1,6 @@
-<h1><%= link_to @user.name, user_path(@user)%></h1>
+<div class="content">
+  <%= gravatar_for @user, :size => 50 %>
+  <span class= "user_name"><%= link_to @user.name,user_path(@user) %> <br/>  </span>
 
 <% if !(@project.nil?)  %>
   <p> <%= link_to @project.name, user_projects_path(@user)  %>  </p>
@@ -57,3 +59,4 @@
     <%= link_to "Add the task to the list to the project", new_user_project_list_task_path(@user, @project, @list)%>
   <% end %>
 </table>
+</div>

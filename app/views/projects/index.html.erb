@@ -1,7 +1,7 @@
- <h1>
-    <%= gravatar_for @user %>
-    <%= link_to @user.name, user_path(@user) %>
- </h1>
+<div class="content">
+  <%= gravatar_for @user, :size => 50 %>
+       <span class= "user_name"><%= link_to @user.name,user_path(@user) %> <br/>  </span>
+
  <% if @user.projects.blank? %>
    <p> There is no project. </p><br />
    <p>Do you want to   <%=  link_to "Add", new_user_project_path(@user)%> new one?</p>
@@ -22,3 +22,4 @@
     </table>
      <p>Do you want to   <%=  link_to "Add", new_user_project_path(@user)%> new one?</p>
 <% end %>
+</div>

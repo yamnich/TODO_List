@@ -1,43 +1,37 @@
- <h1>
-   <%= gravatar_for @user%>
-   <%= @user.name %>
- </h1>
+<div class="content">
+    <%= gravatar_for @user, :size => 50 %>
+     <span class= "user_name"><%= link_to @user.name,user_path(@user) %> <br/>  </span>
 
+    <% if !(@project.nil?)  %>
+      <p> <%= @project.name %>  </p>
+      <%=  link_to "Users lists", user_lists_path(@user) %>
+    <% else %>
+      <%=  link_to "Users projects", user_projects_path(@user) %>
+    <%end%>
 
- <% if !(@project.nil?)  %>
-   <p> <%= @project.name %>  </p>
-   <tr>
-     <td><%=  link_to "Users lists", user_lists_path(@user) %></td>
-   </tr>
- <% else %>
-   <tr>
-     <td><%=  link_to "Users projects", user_projects_path(@user) %></td>
-   </tr>
- <%end%>
+    <% if @lists.blank? %>
+      <p> There is no list. </p><br />
+    <% else %>
 
- <% if @lists.blank? %>
-   <p> There is no list. </p><br />
- <% else %>
-
-   <table>
-     <% @lists.each do |list|%>
-       <% if !(@project.nil?) %>
+    <table>
+      <% @lists.each do |list|%>
+        <% if !(@project.nil?) %>
          <tr>
            <td><%=  link_to list.name,user_project_list_tasks_path(@user,@project, list) %></td>
            <td><%=  list.description %></td>
            <td><%=  link_to "Edit", edit_user_project_list_path(@user,@project, list)%></td>
            <td><%=  link_to "Delete", [@user,@project,list], confirm: 'Are you sure?', method: :delete %></td>
          </tr>
-       <% else %>
+        <% else %>
          <tr>
            <td><%=  link_to list.name,user_list_tasks_path(@user, list) %></td>
            <td><%=  list.description %></td>
            <td><%=  link_to "Edit", edit_user_list_path(@user, list)%></td>
            <td><%=  link_to "Delete", [@user,list], confirm: 'Are you sure?', method: :delete %></td>
-        </tr>
-       <% end %>
-     <% end %>
-   </table>
+         </tr>
+        <% end %>
+      <% end %>
+    </table>
  <% end %>
 
  <% if @project.nil? %>
@@ -45,5 +39,5 @@
  <% else %>
    <%= link_to "Add the list to the project", new_user_project_list_path(@user, @project)%>
  <% end %>
-
+</div>
 

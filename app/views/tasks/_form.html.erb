@@ -1,6 +1,7 @@
 <%= form_for([@user,@project, @list,@task]) do |f| %>
- <%= render 'shared/error_messages', :object => f.object %>
-    <div class="field">
+
+  <%= render 'shared/error_messages', :object => f.object %>
+  <div class="field">
     <%= f.label :name %> <br />
     <%= f.text_field :name %>
   </div>
@@ -22,7 +23,6 @@
   </div>
 
   <div class="actions">
-
     <%= f.submit @button_name %>
   </div>
-<% end %>
+ <% end %>

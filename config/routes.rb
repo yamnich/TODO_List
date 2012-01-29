@@ -37,13 +37,14 @@ TodoList::Application.routes.draw do
   end
 
   resources :lists do
-    resources :tasks  do
+    resources :tasks, except: [:show] do
       member do
          get 'change_state'
       end
     end
   end
   resources :sessions, only: [:create]
+  match '/lists/:list_id/tasks/:state' => 'tasks#index', state: /(done|in_work)/
  # resources :relationships, only: [:create, :destroy]
 
 #  match '/users', :to => "users#index"

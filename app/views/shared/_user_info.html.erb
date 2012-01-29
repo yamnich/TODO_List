@@ -1,7 +1,6 @@
 <div class = "sidebar">
   <%= gravatar_for current_user, :size => 50 %>
  <span class= "user_name"><%= link_to current_user.name,user_path(current_user) %> <br/>  </span>
-  <%= link_to pluralize(current_user.projects.count, "Project"), user_projects_path(current_user) %>  <br />
-  <%= link_to pluralize(current_user.lists.count, "List"), user_lists_path(current_user) %>
-
+  <%= link_to pluralize(current_user.projects.count, "Project"), projects_path%>  <br />
+  <%= link_to pluralize(current_user.lists.count, "List"), lists_path %>
 </div>

@@ -1,43 +1,31 @@
 <div class="content">
-    <%= gravatar_for @user, :size => 50 %>
-     <span class= "user_name"><%= link_to @user.name,user_path(@user) %> <br/>  </span>
-
-    <% if !(@project.nil?)  %>
-      <p> <%= @project.name %>  </p>
-      <%=  link_to "Users lists", user_lists_path(@user) %>
-    <% else %>
-      <%=  link_to "Users projects", user_projects_path(@user) %>
-    <%end%>
-
+  <% if !(@project.nil?) %>
+      <span class="project_name"><%= @project.name %></span><br />
+              <%=  link_to "Users lists", lists_path %>
+   <% else %>
+        <%=  link_to "Users projects", projects_path %>
+        <% end %>
     <% if @lists.blank? %>
       <p> There is no list. </p><br />
     <% else %>
 
     <table>
       <% @lists.each do |list|%>
-        <% if !(@project.nil?) %>
          <tr>
-           <td><%=  link_to list.name,user_project_list_tasks_path(@user,@project, list) %></td>
+           <td><%=  link_to list.name,list_tasks_path(list) %></td>
            <td><%=  list.description %></td>
-           <td><%=  link_to "Edit", edit_user_project_list_path(@user,@project, list)%></td>
-           <td><%=  link_to "Delete", [@user,@project,list], confirm: 'Are you sure?', method: :delete %></td>
+           <td><%=  link_to "Edit", edit_list_path(list)%></td>
+           <td><%=  link_to "Delete", [@project, list], confirm: 'Are you sure?', method: :delete %></td>
          </tr>
-        <% else %>
-         <tr>
-           <td><%=  link_to list.name,user_list_tasks_path(@user, list) %></td>
-           <td><%=  list.description %></td>
-           <td><%=  link_to "Edit", edit_user_list_path(@user, list)%></td>
-           <td><%=  link_to "Delete", [@user,list], confirm: 'Are you sure?', method: :delete %></td>
-         </tr>
-        <% end %>
+
+
       <% end %>
     </table>
  <% end %>
-
- <% if @project.nil? %>
-   <%= link_to "Add the list", new_user_list_path(@user) %>
- <% else %>
-   <%= link_to "Add the list to the project", new_user_project_list_path(@user, @project)%>
- <% end %>
-</div>
+  <% if @project.nil? %>
+    <%= link_to "Add the list", new_list_path %>
+  <% else %>
+    <%= link_to "Add the list to the project", new_project_list_path(@project) %>
+  <% end %>
+ </div>
 

@@ -1,25 +1,23 @@
 <div class="content">
-  <%= gravatar_for @user, :size => 50 %>
-       <span class= "user_name"><%= link_to @user.name,user_path(@user) %> <br/>  </span>
 
- <% if @user.projects.blank? %>
+ <% if current_user.projects.blank? %>
    <p> There is no project. </p><br />
-   <p>Do you want to   <%=  link_to "Add", new_user_project_path(@user)%> new one?</p>
+   <p>Do you want to   <%=  link_to "Add", new_project_path%> new one?</p>
  <% else %>
    <table>
      <tr>
-      <td><%=  link_to "User lists", user_lists_path(@user) %></td>
+      <td><%=  link_to "User lists", lists_path %></td>
      </tr>
      <tr></tr>
-     <% @user.projects.each do |project|           %>
+     <% current_user.projects.each do |project|           %>
         <tr>
-        <td><%=  link_to project.name, user_project_lists_path(@user, project) %></td>
+        <td><%=  link_to project.name, project_lists_path(project) %></td>
         <td><%=  project.description %></td>
-        <td><%=  link_to "Edit", edit_user_project_path(@user, project)%></td>
-        <td><%=  link_to "Delete", [@user, project], confirm: 'Are you sure?', method: :delete %></td>
+        <td><%=  link_to "Edit", edit_project_path( project)%></td>
+        <td><%=  link_to "Delete", [project], confirm: 'Are you sure?', method: :delete %></td>
         </tr>
       <% end %>
     </table>
-     <p>Do you want to   <%=  link_to "Add", new_user_project_path(@user)%> new one?</p>
+     <p>Do you want to   <%=  link_to "Add", new_project_path%> new one?</p>
 <% end %>
 </div>

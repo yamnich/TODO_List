@@ -116,6 +116,21 @@ nav ul li a:hover {
 .footer nav{
     background: #e8e3d8;
 }
+
+.task_state li{
+    list-style: none;
+    font-size: 120%;
+    color: #fff;
+    margin-left: -15px;
+}
+
+.project_name{
+    font-size: 200%;
+}
+
+.list_name{
+    font-size: 150%;
+}
 /* Sing up button */
 a.signup_button {
     margin-left:  auto;

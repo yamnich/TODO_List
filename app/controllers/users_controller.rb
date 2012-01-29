@@ -18,7 +18,10 @@ class UsersController < ApplicationController
     def show
       @user = User.find(params[:id])
       @title = @user.name
+      @lists = @user.lists
+      @projects = @user.projects
      #redirect_to user_path(@user)
+      redirect_to root_path
     end
 
     def edit
@@ -31,7 +34,8 @@ class UsersController < ApplicationController
       if @user.save
         sign_in @user
         flash[:success] = "Welcome!"
-        redirect_to user_path(@user)
+        #redirect_to user_path(@user)
+        redirect_to root_path
       else
         @title = "Sign up"
         render 'new'
@@ -42,7 +46,8 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
          if @user.update_attributes(params[:user])
            flash[:success] = "Profile update."
-           redirect_to @user
+           #redirect_to @user
+           redirect_to root_path
          else
            @title = "Edit user"
            render 'edit'

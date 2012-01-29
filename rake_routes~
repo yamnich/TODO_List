@@ -1,0 +1,38 @@
+     sessions_new GET    /sessions/new(.:format)                        {:controller=>"sessions", :action=>"new"}
+       pages_home GET    /pages/home(.:format)                          {:controller=>"pages", :action=>"home"}
+    pages_contact GET    /pages/contact(.:format)                       {:controller=>"pages", :action=>"contact"}
+      pages_about GET    /pages/about(.:format)                         {:controller=>"pages", :action=>"about"}
+        tasks_new GET    /tasks/new(.:format)                           {:controller=>"tasks", :action=>"new"}
+        lists_new GET    /lists/new(.:format)                           {:controller=>"lists", :action=>"new"}
+      users_index GET    /users/index(.:format)                         {:controller=>"users", :action=>"index"}
+    project_lists GET    /projects/:project_id/lists(.:format)          {:action=>"index", :controller=>"lists"}
+                  POST   /projects/:project_id/lists(.:format)          {:action=>"create", :controller=>"lists"}
+ new_project_list GET    /projects/:project_id/lists/new(.:format)      {:action=>"new", :controller=>"lists"}
+edit_project_list GET    /projects/:project_id/lists/:id/edit(.:format) {:action=>"edit", :controller=>"lists"}
+     project_list PUT    /projects/:project_id/lists/:id(.:format)      {:action=>"update", :controller=>"lists"}
+                  DELETE /projects/:project_id/lists/:id(.:format)      {:action=>"destroy", :controller=>"lists"}
+         projects GET    /projects(.:format)                            {:action=>"index", :controller=>"projects"}
+                  POST   /projects(.:format)                            {:action=>"create", :controller=>"projects"}
+      new_project GET    /projects/new(.:format)                        {:action=>"new", :controller=>"projects"}
+     edit_project GET    /projects/:id/edit(.:format)                   {:action=>"edit", :controller=>"projects"}
+          project PUT    /projects/:id(.:format)                        {:action=>"update", :controller=>"projects"}
+                  DELETE /projects/:id(.:format)                        {:action=>"destroy", :controller=>"projects"}
+       list_tasks GET    /lists/:list_id/tasks(.:format)                {:action=>"index", :controller=>"tasks"}
+                  POST   /lists/:list_id/tasks(.:format)                {:action=>"create", :controller=>"tasks"}
+    new_list_task GET    /lists/:list_id/tasks/new(.:format)            {:action=>"new", :controller=>"tasks"}
+   edit_list_task GET    /lists/:list_id/tasks/:id/edit(.:format)       {:action=>"edit", :controller=>"tasks"}
+        list_task PUT    /lists/:list_id/tasks/:id(.:format)            {:action=>"update", :controller=>"tasks"}
+                  DELETE /lists/:list_id/tasks/:id(.:format)            {:action=>"destroy", :controller=>"tasks"}
+            lists GET    /lists(.:format)                               {:action=>"index", :controller=>"lists"}
+                  POST   /lists(.:format)                               {:action=>"create", :controller=>"lists"}
+         new_list GET    /lists/new(.:format)                           {:action=>"new", :controller=>"lists"}
+        edit_list GET    /lists/:id/edit(.:format)                      {:action=>"edit", :controller=>"lists"}
+             list PUT    /lists/:id(.:format)                           {:action=>"update", :controller=>"lists"}
+                  DELETE /lists/:id(.:format)                           {:action=>"destroy", :controller=>"lists"}
+         sessions POST   /sessions(.:format)                            {:action=>"create", :controller=>"sessions"}
+      new_session GET    /sessions/new(.:format)                        {:action=>"new", :controller=>"sessions"}
+          session DELETE /sessions/:id(.:format)                        {:action=>"destroy", :controller=>"sessions"}
+           signup        /signup(.:format)                              {:controller=>"users", :action=>"new"}
+           signin        /signin(.:format)                              {:controller=>"sessions", :action=>"new"}
+          signout        /signout(.:format)                             {:controller=>"sessions", :action=>"destroy"}
+             root        /                                              {:controller=>"pages", :action=>"home"}

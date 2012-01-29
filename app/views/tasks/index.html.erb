@@ -1,62 +1,31 @@
 <div class="content">
-  <%= gravatar_for @user, :size => 50 %>
-  <span class= "user_name"><%= link_to @user.name,user_path(@user) %> <br/>  </span>
 
 <% if !(@project.nil?)  %>
-  <p> <%= link_to @project.name, user_projects_path(@user)  %>  </p>
-  <tr>
-    <td><%=  link_to "Users lists", user_lists_path(@user) %></td>
-  </tr>
-
-<% else %>
-  <tr>
-    <td><%=  link_to "Users projects", user_projects_path(@user) %></td>
-  </tr>
+  <p><span class="project_name"> <%= link_to @project.name, projects_path  %></span>  </p>
 <%end%>
 
-<h2><%=  @list.name%></h2>
+<p class="list_name"><%=  @list.name%></p>
 
-<% if @project.nil?  %>
-<ul>
-  <li> <%= link_to "Done",  user_list_tasks_url(@user, @list)+'/done' %> </li>
-  <li><%= link_to "In work",  user_list_tasks_url(@user, @list)+'/in_work' %></li>
-  <li><%= link_to "Show all",  user_list_tasks_url(@user, @list) %></li>
+<ul class="task_state">
+  <li> <%= link_to "Done ",  list_tasks_url(@list)+'/done' %> </li>
+  <li><%= link_to "In work ",  list_tasks_url(@list)+'/in_work' %></li>
+  <li><%= link_to "Show all ",  list_tasks_url(@list) %></li>
 </ul>
-<% else %>
-  <ul>
-    <li> <%= link_to "Done",  user_project_list_tasks_url(@user,@project, @list)+'/done' %> </li>
-    <li><%= link_to "In work",  user_project_list_tasks_url(@user,@project, @list)+'/in_work' %></li>
-    <li><%= link_to "Show all",  user_project_list_tasks_url(@user,@project, @list) %></li>
-  </ul>
-<% end %>
-<table>
+
+  <table>
    <% @tasks.each do |task| %>
       <tr class=<%= task.state == "Done" ? 'done' : 'in_work' %>>
         <td><b> <%= task.name  %> </b> </td>
         <td><%= task.description  %></td>
         <td><%= task.priority %></td>
-        <%if @project.nil? %>
-        <td><%= link_to task.state, change_state_user_list_task_url(@user,@list,task)%></td>
-        <% else %>
-         <td><%= link_to task.state, change_state_user_project_list_task_url(@user,@project,@list,task)%></td>
-        <% end %>
+        <td><%= link_to task.state, change_state_list_task_url(@list,task)%></td>
       </tr>
       <tr>
-        <%if @project.nil? %>
-        <td><%= link_to "Edit", edit_user_list_task_path(@user, @list,task) %></td>
-        <td><%= link_to "Delete",[@user, @list, task] , confirm: 'Are you sure?', method: :delete %></td>
-         <% else %>
-            <td><%= link_to "Edit", edit_user_project_list_task_path(@user,@project, @list,task) %></td>
-           <td><%= link_to "Delete",[@user,@project, @list, task] , confirm: 'Are you sure?', method: :delete %></td>
-
-        <% end %>
+         <td><%= link_to "Edit", edit_list_task_path(@list,task) %></td>
+         <td><%= link_to "Delete",[ @list, task] , confirm: 'Are you sure?', method: :delete %></td>
       </tr>
    <% end %>
+ </table>
 
-  <% if @project.nil? %>
-    <%= link_to "Add the task", new_user_list_task_path(@user, @list) %>
-  <% else %>
-    <%= link_to "Add the task to the list to the project", new_user_project_list_task_path(@user, @project, @list)%>
-  <% end %>
-</table>
+  <%= link_to "Add the task", new_list_task_path(@list) %>
 </div>

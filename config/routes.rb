@@ -1,16 +1,11 @@
 TodoList::Application.routes.draw do
-
-  get "sessions/new"
-
   get "pages/home"
-
   get "pages/contact"
-
   get "pages/about"
-
   get "tasks/new"
   get "lists/new"
   get "users/index"
+=begin
   match '/users/:user_id/lists/:list_id/tasks/:state' => 'tasks#index', state: /(done|in_work)/
   resources :users do
     member do
@@ -35,13 +30,24 @@ TodoList::Application.routes.draw do
       end
     end
   end
+=end
+  resources :users, except: [:index]
+  resources :projects do
+    resources :lists
+  end
 
-  resources :sessions, only: [:new, :create, :destroy]
-  resources :relationships, only: [:create, :destroy]
+  resources :lists do
+    resources :tasks  do
+      member do
+         get 'change_state'
+      end
+    end
+  end
+  resources :sessions, only: [:create]
+ # resources :relationships, only: [:create, :destroy]
 
-  match '/users', :to => "users#index"
+#  match '/users', :to => "users#index"
   match '/signup', :to => 'users#new'
-
   match '/signin', :to =>  'sessions#new'
   match '/signout', :to => 'sessions#destroy'
 

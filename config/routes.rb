@@ -32,7 +32,7 @@ TodoList::Application.routes.draw do
   end
 =end
   resources :users, except: [:index]
-  resources :projects do
+  resources :projects, except: [:show] do
     resources :lists
   end
 
@@ -44,7 +44,13 @@ TodoList::Application.routes.draw do
     end
   end
   resources :sessions, only: [:create]
+#  resources :teams, only: [:destroy, :new , :create]
   match '/lists/:list_id/tasks/:state' => 'tasks#index', state: /(done|in_work)/
+ #match '/projects/:project_id/members' => 'teams#show'
+ #get  '/projects/:project_id/members/invite' => 'teams#new'
+ #post   '/projects/:project_id/members/invite' => 'teams#create'
+ #delete   '/projects/:project_id/members' => 'teams#destroy'
+
  # resources :relationships, only: [:create, :destroy]
 
 #  match '/users', :to => "users#index"

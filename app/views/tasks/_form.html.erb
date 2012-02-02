@@ -1,28 +1,27 @@
 <%= form_for([@user,@project, @list,@task]) do |f| %>
 
-  <%= render 'shared/error_messages', :object => f.object %>
-  <div class="field">
-    <%= f.label :name %> <br />
-    <%= f.text_field :name %>
-  </div>
+    <%= render 'shared/error_messages', :object => f.object %>
+    <div class="field">
+        <%= f.label :name %> <br />
+        <%= f.text_field :name %>
+    </div>
 
-  <div class="field">
-    <%= f.label :description %> <br />
-    <%= f.text_field :description %>
+    <div class="field">
+        <%= f.label :description %> <br />
+        <%= f.text_field :description %>
+    </div>
+
+   <div class="field">
+       <%= f.label :state %> <br />
+       <%= f.check_box :state,{}, "Done", "In work" %>
   </div>
 
    <div class="field">
-    <%= f.label :state %> <br />
-    <%= f.check_box :state,{}, "Done", "In work" %>
-  </div>
-
-
-   <div class="field">
-    <%= f.label :priority %> <br />
-    <%= f.select :priority, 1..5 %>
+       <%= f.label :priority %> <br />
+       <%= f.select :priority, 1..5 %>
   </div>
 
   <div class="actions">
-    <%= f.submit @button_name %>
+      <%= f.submit @button_name %>
   </div>
  <% end %>

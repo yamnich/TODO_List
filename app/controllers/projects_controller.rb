@@ -1,30 +1,32 @@
 class ProjectsController < ApplicationController
   def new
       @title = "New Project"
-      @project = current_user.projects.build
+      @project = Project.new
       @button_name = "New"
   end
 
   def index
     @title = "Index Projects"
-    @projects = current_user.projects
+    @projects=Project.where("user_id = ?", current_user.id)
   end
 
   def show
-    @project = current_user.projects.find(params[:id])
+    @project = Project.find(params[:id])
     redirect_to lists_path
   end
 
   def edit
     @title = "Edit Project"
-    @project = current_user.projects.find(params[:id])
+    @project = Project.find(params[:id])
+    @project.user_id=current_user.id
     @button_name = "Update"
 
   end
 
   def create
     @title = "Create Project"
-    @project = current_user.projects.build(params[:project])
+    @project = Project.create(params[:project])
+    @project.user_id = current_user.id
     if @project.save
       flash[:notice] = 'Project was successfully created'
       redirect_to projects_path
@@ -33,11 +35,12 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def update
+   def update
       @title = "Update Project"
-      @project = current_user.projects.find(params[:id])
+      @project = Project.find(params[:id])
+      @project.user_id=current_user.id
       if @project.update_attributes(params[:project])
-        redirect_to projects_path(@user)
+        redirect_to projects_path
       else
         render 'edit'
       end
@@ -45,11 +48,11 @@ class ProjectsController < ApplicationController
 
 
     def destroy
-      @project = current_user.projects.find(params[:id])
+      @project = Project.find(params[:id])
       @project.destroy
-
       flash[:success] = "Project is destroyed."
-      redirect_to projects_path(@user)
+      redirect_to projects_path
     end
 
   end
+

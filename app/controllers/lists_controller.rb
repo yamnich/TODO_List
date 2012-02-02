@@ -17,7 +17,9 @@ class ListsController < ApplicationController
       @project = Project.find(params[:project_id])
       @lists = @project.lists.all
     else
-    @lists = current_user.lists
+    #@lists = current_user.lists.where("project_id = 'nil'")
+    @lists = current_user.lists.all
+
     end
 
   end

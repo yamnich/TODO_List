@@ -22,7 +22,7 @@ class TasksController < ApplicationController
   def index
      @title = "index_task"
      @list= List.find(params[:list_id])
-     @project = Project.find(@list.project_id)
+    # @project = Project.find(@list.project_id)
      if params[:state] == "done"
        @tasks = @list.tasks.where("state = 'Done'")
      elsif params[:state] == "in_work"

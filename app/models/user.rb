@@ -3,7 +3,10 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation
 
   has_many :lists,  dependent: :destroy
-   has_many :projects, dependent: :destroy
+
+  has_many :project_memberships, foreign_key: 'user_id'
+  has_many :project, through: :project_memberships
+  #   has_many :projects, dependent: :destroy
  # has_and_belongs_to_many :projects;
 #has_many :relationships, foreign_key: "follower_id", dependent: :destroy
 #has_many :following, through: :relationships, source: :followed

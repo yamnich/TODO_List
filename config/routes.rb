@@ -5,32 +5,7 @@ TodoList::Application.routes.draw do
   get "tasks/new"
   get "lists/new"
   get "users/index"
-=begin
-  match '/users/:user_id/lists/:list_id/tasks/:state' => 'tasks#index', state: /(done|in_work)/
-  resources :users do
-    member do
-      get :following, :followers
-    end
 
-    resources :lists do
-      resources :tasks do
-      member do
-        get 'change_state'
-      end
-     end
-    end
-
-    resources :projects do
-      resources :lists do
-        resources :tasks do
-          member do
-            get 'change_state'
-          end
-        end
-      end
-    end
-  end
-=end
   resources :users, except: [:index]
   resources :projects, except: [:show] do
     resources :lists
@@ -43,15 +18,12 @@ TodoList::Application.routes.draw do
       end
     end
   end
-  resources :sessions, only: [:create]
-#  resources :teams, only: [:destroy, :new , :create]
-  match '/lists/:list_id/tasks/:state' => 'tasks#index', state: /(done|in_work)/
- #match '/projects/:project_id/members' => 'teams#show'
- #get  '/projects/:project_id/members/invite' => 'teams#new'
- #post   '/projects/:project_id/members/invite' => 'teams#create'
- #delete   '/projects/:project_id/members' => 'teams#destroy'
-
- # resources :relationships, only: [:create, :destroy]
+ resources :sessions, only: [:create]
+ match '/lists/:list_id/tasks/:state' => 'tasks#index', state: /(done|in_work)/
+ match '/projects/:project_id/members' => 'project_memberships#index', :as => "members_project"
+ get  '/projects/:project_id/members/invite' => 'project_memberships#new'
+ post   '/projects/:project_id/members/invite' => 'project_memberships#create'
+ delete   '/projects/:project_id/members/:id' => 'project_memberships#destroy', :as => "destroy_members_project"
 
 #  match '/users', :to => "users#index"
   match '/signup', :to => 'users#new'

@@ -4,17 +4,9 @@ class User < ActiveRecord::Base
 
   has_many :lists,  dependent: :destroy
 
-  has_many :project_memberships, foreign_key: 'user_id'
-  has_many :project, through: :project_memberships
-  #   has_many :projects, dependent: :destroy
- # has_and_belongs_to_many :projects;
-#has_many :relationships, foreign_key: "follower_id", dependent: :destroy
-#has_many :following, through: :relationships, source: :followed
+  has_many :project_memberships, foreign_key: 'member_id'
+  has_many :projects, through: :project_memberships
 
-#has_many :reverse_relationships, foreign_key: "followed_id",
-#                                                         class_name: "Relationship",
-#                                                         dependent: :destroy
-#has_many :followers, through: :reverse_relationships, source: :follower
   email_regex=/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
    validates :name, :presence => true,
@@ -46,15 +38,15 @@ class User < ActiveRecord::Base
    end
 
    def member?(project)
-     teams.find_by_project_id(project)
+     project_memberships.find_by_project_id(project)
    end
 
   def join!(project)
-     teams.create!(project_id: project.id)
+    project_memberships.create!(project_id: project.id)
   end
 
   def leave!(project)
-      teams.find_by_project_id(project).destroy
+    project_memberships.find_by_project_id(project).destroy
   end
 =begin
      def following?(followed)

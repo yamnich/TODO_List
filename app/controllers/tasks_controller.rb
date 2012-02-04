@@ -3,6 +3,11 @@ class TasksController < ApplicationController
   def new
     @title = "New_Task"
     @list =  List.find(params[:list_id])
+    @project=@list.project
+    if !@project.nil?
+      @members=@project.members
+    end
+
     @task = @list.tasks.build
     @button_name = "New"
   end

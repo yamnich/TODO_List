@@ -1,4 +1,4 @@
-<%= form_for([@user,@project, @list,@task]) do |f| %>
+<%= form_for([ @list,@task]) do |f| %>
 
     <%= render 'shared/error_messages', :object => f.object %>
     <div class="field">
@@ -20,6 +20,13 @@
        <%= f.label :priority %> <br />
        <%= f.select :priority, 1..5 %>
   </div>
+
+  <% if !@members.nil? %>
+    <div class="field">
+      <%= f.label :executor_id %> <br />
+      <%= f.select :executor_id, options_from_collection_for_select(@members,'id','name') %>
+    </div>
+  <% end %>
 
   <div class="actions">
       <%= f.submit @button_name %>

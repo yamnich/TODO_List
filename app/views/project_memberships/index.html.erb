@@ -1,3 +1,4 @@
+<div class="content">
 <% if @project.members.nil? %>
 <p> There is no member</p>
 <% else %>
@@ -10,3 +11,4 @@
 
 <% end %>
 <p><%=  link_to "Invite user to project", project_path(@project)+'/members/invite'  %></p>
+</div>

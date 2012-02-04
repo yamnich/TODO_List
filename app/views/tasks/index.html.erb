@@ -18,6 +18,7 @@
                <td><b> <%= task.name  %> </b> </td>
                <td><%= task.description  %></td>
                <td><%= task.priority %></td>
+               <td><%= task.executor.name if !task.executor.nil? %></td>
                <td><%= link_to task.state, change_state_list_task_url(@list,task)%></td>
             </tr>
             <tr>

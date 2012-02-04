@@ -2,23 +2,25 @@ class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :name, :email, :password, :password_confirmation
 
-  has_many :lists,  dependent: :destroy
-
   has_many :project_memberships, foreign_key: 'member_id'
   has_many :projects, through: :project_memberships
+
+  has_many :lists,  dependent: :destroy
+
+  has_many :tasks, foreign_key: 'executor_id'
 
   email_regex=/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
    validates :name, :presence => true,
-                  :length   => {:maximum=>50}
+             :length   => {:maximum=>50}
 
    validates :email, :presence    => true,
-                  :format      => {:with =>   email_regex},
-                  :uniqueness  => {:case_sensitive => false}
+             :format      => {:with =>   email_regex},
+             :uniqueness  => {:case_sensitive => false}
 
    validates :password, :presence     => true,
-                  :confirmation => true,
-                  :length       => {:within => 6..40}
+             :confirmation => true,
+             :length       => {:within => 6..40}
 
    before_save :encrypt_password
 
@@ -48,19 +50,7 @@ class User < ActiveRecord::Base
   def leave!(project)
     project_memberships.find_by_project_id(project).destroy
   end
-=begin
-     def following?(followed)
-       relationships.find_by_followed_id(followed)
-     end
 
-    def follow!(followed)
-      relationships.create!(followed_id: followed.id)
-    end
-
-    def unfollow!(followed)
-      relationships.find_by_followed_id(id).destroy
-    end
-=end
      private
 
      def encrypt_password

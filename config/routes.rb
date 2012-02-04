@@ -2,16 +2,16 @@ TodoList::Application.routes.draw do
   get "pages/home"
   get "pages/contact"
   get "pages/about"
-  get "tasks/new"
-  get "lists/new"
+  #get "tasks/new"
+  #get "lists/new"
   get "users/index"
 
   resources :users, except: [:index]
   resources :projects, except: [:show] do
-    resources :lists
+    resources :lists,  except: [:show]
   end
 
-  resources :lists do
+  resources :lists, except: [:show] do
     resources :tasks, except: [:show] do
       member do
          get 'change_state'

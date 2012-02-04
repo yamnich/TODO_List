@@ -1,0 +1,30 @@
+<div class="content">
+    <% if !(@project.nil?) %>
+        <span class="project_name"><%= @project.name %></span><br />
+        <%=  link_to "Users lists", lists_path %>
+   <% else %>
+        <%=  link_to "Users projects", projects_path %>
+   <% end %>
+
+    <% if @lists.blank? %>
+         <p> There is no list. </p><br />
+    <% else %>
+
+         <table>
+            <% @lists.each do |list|%>
+                  <tr>
+                      <td><%=  link_to list.name,list_tasks_path(list) %></td>
+                      <td><%=  list.description %></td>
+                      <td><%=  link_to "Edit", edit_list_path(list)%></td>
+                      <td><%=  link_to "Delete", [@project, list], confirm: 'Are you sure?', method: :delete %></td>
+                  </tr>
+            <% end %>
+         </table>
+    <% end %>
+    <% if @project.nil? %>
+         <%= link_to "Add the list", new_list_path %>
+    <% else %>
+         <%= link_to "Add the list to the project", new_project_list_path(@project) %>
+    <% end %>
+ </div>
+

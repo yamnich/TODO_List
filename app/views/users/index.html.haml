@@ -1,0 +1,9 @@
+.content
+  %h1 All users
+    %table
+      - @users.each do |user|
+        %tr
+          %td
+            = gravatar_for user
+            = link_to user.name, user
+

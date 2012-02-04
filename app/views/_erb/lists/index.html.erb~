@@ -1,0 +1,18 @@
+ <h1>
+   <%= gravatar_for @user%>
+   <%= @user.name %>
+ </h1>
+
+
+ <% if !(@project.blank?)  %>
+   <p> <%= @project.name %>  </p>
+   <tr>
+     <td><%=  link_to "Users lists", user_lists_path(@user) %></td>
+   </tr>
+ <% else %>
+   <tr>
+     <td><%=  link_to "Users projects", user_project_lists_path(@user,@project) %></td>
+   </tr>
+ <%end%>
+
+ 

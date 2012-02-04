@@ -1,0 +1,10 @@
+<%= form_tag  ({:action =>  'new'})  do  %>
+      <div class="field">
+      <%= email_field_tag  'email' %> <br />
+
+    </div>
+
+    <div class="actions">
+      <%=button_tag @button_name %>
+    </div>
+<% end %>

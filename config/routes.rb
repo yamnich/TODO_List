@@ -2,8 +2,6 @@ TodoList::Application.routes.draw do
   get "pages/home"
   get "pages/contact"
   get "pages/about"
-  #get "tasks/new"
-  #get "lists/new"
   get "users/index"
 
   resources :users, except: [:index]
@@ -25,12 +23,11 @@ TodoList::Application.routes.draw do
  post   '/projects/:project_id/members/invite' => 'project_memberships#create'
  delete   '/projects/:project_id/members/:id' => 'project_memberships#destroy', :as => "destroy_members_project"
 
-#  match '/users', :to => "users#index"
   match '/signup', :to => 'users#new'
   match '/signin', :to =>  'sessions#new'
   match '/signout', :to => 'sessions#destroy'
 
-  root :to => "pages#home"
+  root :to => 'pages#home'
 
 
 

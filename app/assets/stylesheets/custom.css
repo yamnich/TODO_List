@@ -117,11 +117,11 @@ nav ul li a:hover {
     background: #e8e3d8;
 }
 
-.task_state li{
-    list-style: none;
+.task_state {
     font-size: 120%;
     color: #fff;
-    margin-left: -15px;
+    margin-bottom: 20px;
+   /* margin-left: -15px;   */
 }
 
 .project_name{

@@ -1,0 +1,16 @@
+
+
+<div class ="content">
+<h1>
+    <%= gravatar_for @user %>
+    <%= @user.name %>
+ </h1>
+  
+    <%= render 'follow_form' if signed_in? %>
+    <ul>
+      <li><%= link_to pluralize(@user.lists.count, "List"), user_lists_path(@user)  %></li>
+      <li><%= link_to pluralize(@user.projects.count, "Project"), user_projects_path(@user)   %></li>
+    </ul>
+
+</div>
+

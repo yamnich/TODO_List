@@ -44,10 +44,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user_spec.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="user_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spec/models/user_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="3" selection-start="1163" selection-end="1163" vertical-scroll-proportion="0.9457093">
+            <state line="36" column="3" selection-start="1163" selection-end="1163" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -62,10 +62,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="task.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="task.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models/task.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="27" selection-start="244" selection-end="244" vertical-scroll-proportion="0.0">
+            <state line="8" column="1" selection-start="226" selection-end="226" vertical-scroll-proportion="0.21015762">
               <folding />
             </state>
           </provider>
@@ -142,9 +142,9 @@
         <option value="$PROJECT_DIR$/spec/models/list_spec.rb" />
         <option value="$PROJECT_DIR$/spec/models/task_spec.rb" />
         <option value="$PROJECT_DIR$/spec/factories/tasks.rb" />
-        <option value="$PROJECT_DIR$/app/models/task.rb" />
         <option value="$PROJECT_DIR$/spec/models/project_memberships_spec.rb" />
         <option value="$PROJECT_DIR$/spec/models/user_spec.rb" />
+        <option value="$PROJECT_DIR$/app/models/task.rb" />
       </list>
     </option>
   </component>
@@ -904,13 +904,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/task.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="27" selection-start="244" selection-end="244" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spec/models/project_memberships_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="2" selection-start="113" selection-end="113" vertical-scroll-proportion="0.0">
@@ -920,7 +913,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/models/user_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="3" selection-start="1163" selection-end="1163" vertical-scroll-proportion="0.9457093">
+        <state line="36" column="3" selection-start="1163" selection-end="1163" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/task.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="1" selection-start="226" selection-end="226" vertical-scroll-proportion="0.21015762">
           <folding />
         </state>
       </provider>

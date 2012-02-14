@@ -1,17 +1,16 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe List do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it {should have_many(:tasks).dependent(:destroy)}
+  it {should belong_to :user}
+  it {should belong_to :project}
+
+  it {should validate_presence_of :name}
+
+  it "should create list with valid attributes" do
+    lambda{
+      Factory.create(:list)
+    }.should change{List.count}.by(1)
+  end
 end
-
-# == Schema Information
-#
-# Table name: lists
-#
-#  id          :integer         not null, primary key
-#  name        :string(255)
-#  description :text
-#  created_at  :datetime
-#  updated_at  :datetime
-#
-

@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   respond_to :html, :xml, :json
+
   def new
     @title = "New_Task"
     @list =  List.find(params[:list_id])
@@ -7,7 +8,6 @@ class TasksController < ApplicationController
     if !@project.nil?
       @members=@project.members
     end
-
     @task = @list.tasks.build
     @button_name = "New"
   end
@@ -18,7 +18,12 @@ class TasksController < ApplicationController
     @title = 'Creating task'
     if @task.save
       flash[:notice] = 'Task was successfully created'
-        redirect_to list_tasks_path(@list)
+      if !@task.executor_id != current_user.id
+        @user = User.find_by_id(@task.executor_id)
+        @project = @list.project
+        UserMailer.assignment(@user, @project.name, @task.name).deliver
+      end
+      redirect_to list_tasks_path(@list)
     else
       render 'new'
     end
@@ -27,7 +32,6 @@ class TasksController < ApplicationController
   def index
      @title = "index_task"
      @list= List.find(params[:list_id])
-    # @project = Project.find(@list.project_id)
      if params[:state] == "done"
        @tasks = @list.tasks.where("state = 'Done'")
      elsif params[:state] == "in_work"
@@ -47,36 +51,43 @@ class TasksController < ApplicationController
     @list =List.find(params[:list_id])
     @task = @list.tasks.find(params[:id])
     if @task.update_attributes(params[:task])
+      if !@task.executor_id != current_user.id
+        @project = @list.project
+        @user = User.find_by_id(@task.executor_id)
+        UserMailer.assignment(@user, @project.name, @task.name).deliver
+      end
       redirect_to list_tasks_path(@list)
     else
       render 'edit'
     end
   end
 
-
   def destroy
     @list =List.find(params[:list_id])
-
     @task = @list.tasks.find(params[:id])
     @task.destroy
     flash[:success] = "Task is destroyed."
     redirect_to list_tasks_path( @list)
-
   end
 
   def change_state
     @list =List.find(params[:list_id])
     @task = @list.tasks.find(params[:id])
     if  @task.state == "Done"
-    @task.state = "In work"
-    else @task.state = "Done"
+      @task.state = "In work"
+    else
+      @task.state = "Done"
     end
-        if @task.update_attributes(params[:task])
-          flash[:success] = "Task was updated successfully"
-        else
-          flash[:error] = "Task was not updated"
-        end
-        redirect_to list_tasks_path(@list)
+    if @task.update_attributes(params[:task])
+      flash[:success] = "Task was updated successfully"
+      if !@project.nil? and !@task.executor_id.nil != current_user
+        @user = User.find_by_id(@task.executor_id)
+        UserMailer.changed(@user, @project.name, @task.name).deliver
+      end
+    else
+      flash[:error] = "Task was not updated"
+    end
+      redirect_to list_tasks_path(@list)
   end
 
 

@@ -1,20 +1,13 @@
-require 'spec_helper'
+require "rspec"
 
 describe Task do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it {should belong_to :list}
+ # it {should belong_to :executor}
+
+  it "should create list with valid attributes" do
+    lambda{
+      Factory.create(:task)
+    }.should change{Task.count}.by(1)
+  end
 end
-
-# == Schema Information
-#
-# Table name: tasks
-#
-#  id          :integer         not null, primary key
-#  name        :string(255)
-#  description :text
-#  state       :string(255)
-#  priority    :string(255)
-#  user_id     :integer
-#  created_at  :datetime
-#  updated_at  :datetime
-#
-

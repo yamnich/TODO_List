@@ -1,8 +1,8 @@
 class ProjectsController < ApplicationController
   def new
-      @title = "New Project"
-      @project = Project.new
-      @button_name = "New"
+    @title = "New Project"
+    @project = Project.new
+    @button_name = "New"
   end
 
   def index
@@ -20,7 +20,6 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @project.user_id=current_user.id
     @button_name = "Update"
-
   end
 
   def create
@@ -46,13 +45,12 @@ class ProjectsController < ApplicationController
       end
     end
 
-
-    def destroy
-      @project = Project.find(params[:id])
-      @project.destroy
-      flash[:success] = "Project is destroyed."
-      redirect_to projects_path
-    end
+   def destroy
+     @project = Project.find(params[:id])
+     @project.destroy
+     flash[:success] = "Project is destroyed."
+     redirect_to projects_path
+   end
 
   end
 

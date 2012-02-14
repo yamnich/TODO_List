@@ -51,9 +51,14 @@ class User < ActiveRecord::Base
     project_memberships.find_by_project_id(project).destroy
   end
 
+  def projects_count
+    projects.where("user_id = ?", self.id).count
+  end
+
      private
 
      def encrypt_password
+       self.salt = make_salt unless has_password?(password)
        self.encrypted_password = encrypt(password)
      end
 

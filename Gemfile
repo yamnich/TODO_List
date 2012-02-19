@@ -39,6 +39,9 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
+  gem 'cucumber', '1.1.4'
+  gem 'cucumber-rails', '1.2.1'
+  gem 'capybara', '1.1.2'
 end
 
 gem 'jquery-rails'

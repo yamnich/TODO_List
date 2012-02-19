@@ -1,6 +1,6 @@
 %header
   %div{class: "logo"}
-    =image_tag("logo.png", :alt => "LOGO",  :width => 710)
+    = image_tag("logo.png", :alt => "LOGO",  :width => 710)
   %div
     %nav{class: "main_menu"}
       %ul
@@ -10,6 +10,6 @@
           %li
             = link_to "Profile", current_user
           %li
-            = link_to "Settings", edit_user_path(current_user)
+            = link_to "Settings", edit_user_path(current_user), id: 'Settings'
           %li
             = link_to "Sign out", signout_path, method: :delete

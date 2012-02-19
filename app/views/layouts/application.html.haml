@@ -9,9 +9,11 @@
     .container
       = render 'layouts/header'
       = render 'shared/user_info' if signed_in?
+
       .content
         - flash.each do |key, value|
           = content_tag(:div, value, class: "flash #{key}")
+
         = yield
     .footer
       = render 'layouts/footer'

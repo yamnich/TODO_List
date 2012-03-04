@@ -24,12 +24,14 @@ class ProjectsController < ApplicationController
 
   def create
     @title = "Create Project"
+    #@project = current_user.projects.build(params[:project])
     @project = Project.create(params[:project])
     @project.user_id = current_user.id
     if @project.save
-      flash[:notice] = 'Project was successfully created'
+      flash[:success] = 'Project was successfully created'
       redirect_to projects_path
     else
+      flash[:error] = "Project wasn't created. Please try again"
       render 'new'
     end
   end

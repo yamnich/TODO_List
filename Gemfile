@@ -36,7 +36,7 @@ group :test do
   gem 'spork', '0.9.0.rc8'
   gem 'autotest', '4.4.6'
   gem 'autotest-rails-pure', '4.1.2'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '1.6.0'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
   gem 'cucumber', '1.1.4'

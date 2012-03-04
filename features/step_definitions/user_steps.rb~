@@ -115,7 +115,7 @@ When /^I sign out$/ do
   visit '/signout'
 end
 
-=begin
+
 When /^I want to edit my account details$/ do
   find(".container").find("#Settings").find(".main_menu").find(".test").find("li.test1").click
   fill_in "Name", with: "New user name"
@@ -124,7 +124,6 @@ When /^I want to edit my account details$/ do
   fill_in "Confirmation", with:"Newpassword"
   click_button "Update"
 end
-=end
 
 Then /^I should be sent to sign in page$/ do
   visit '/'

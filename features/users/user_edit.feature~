@@ -22,4 +22,4 @@ Feature:
       Given I am logged in
       When I want to edit my account details  
       Then User data should not change
-      And I should see error message "There were problems with the following fields:"
+      And I should see error message "Profile was updated"

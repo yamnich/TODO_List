@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
 
   def new
-       @title = "New User"
+       @title = "Sign up"
        @user = User.new
        @button_name = "Sign up"
     end
@@ -20,7 +20,6 @@ class UsersController < ApplicationController
       @title = @user.name
       @lists = @user.lists
       @projects = @user.projects
-     #redirect_to user_path(@user)
       redirect_to root_path
     end
 
@@ -34,7 +33,6 @@ class UsersController < ApplicationController
       if @user.save
         sign_in @user
         flash[:success] = "Welcome!"
-        #redirect_to user_path(@user)
         redirect_to root_path
       else
         @title = "Sign up"
@@ -46,7 +44,6 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
          if @user.update_attributes(params[:user])
            flash[:success] = "Profile was updated"
-           #redirect_to @user
            redirect_to root_path
          else
            @title = "Edit user"

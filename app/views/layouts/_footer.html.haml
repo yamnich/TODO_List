@@ -1,7 +1,9 @@
-%footer
-  %nav
-    %ul
-      %li
-        = link_to "News", href="http://news.railstutorial.org"
-      %li
-        = link_to "Rails Tutorial", href="http://news.railstutorial.org"
+.footer
+  .row.footer_bottom
+    .span4.offset6
+      = link_to "News", href="http://news.railstutorial.org"
+      = link_to "Rails Tutorial", href="http://news.railstutorial.org"
+  .span8.offset2
+  = debug(params) if Rails.env.development?
+
+

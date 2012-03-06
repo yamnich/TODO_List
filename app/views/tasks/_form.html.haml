@@ -1,27 +1,20 @@
-= form_for([ @list,@task]) do |f|
+= form_for([ @list,@task], class: "well") do |f|
   = render 'shared/error_messages', :object => f.object
   .field
     = f.label :name
-    %br
     = f.text_field :name
-
-    .field
-      = f.label :description
-      %br
-      = f.text_field :description
-    .field
-      = f.label :state
-      %br
-      = f.check_box :state,{}, "Done", "In work"
-    .field
-      = f.label :priority
-      %br
-      = f.select :priority, 1..5
-
+  .field
+    = f.label :description
+    = f.text_area :description, rows: 5
+  .field
+    = f.label "Done"
+    = f.check_box :state,{}, "Done", "In work"
+  .field
+    = f.label :priority
+    = f.select :priority, 1..5
   - if !@members.nil?
     .field
       = f.label :executor_id
-      %br
       = f.select :executor_id, options_from_collection_for_select(@members,'id','name')
   .actions
-    = f.submit @button_name
+    = f.submit @button_name, class: "btn-info"

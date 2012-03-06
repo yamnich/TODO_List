@@ -2,21 +2,26 @@
 %html
   %head
     %title
-      = @title
+      = @title || "TODO_List"
     = csrf_meta_tag
     = render 'layouts/stylesheets'
     = javascript_include_tag "application"
 
-  %body>
+  %body
     .container
-      = render 'layouts/header'
-      = render 'shared/user_info' if signed_in?
+      .row
+        .span10.top
+          %H1
+            .logo
+              ="TODO_List"
+        .nav.pull-right
+          - if signed_in?
+            = link_to "Home", current_user, class: "btn"
+            = link_to "Settings", edit_user_path(current_user), class: "btn"
+            = link_to "Sign out", signout_path, method: :delete, class: "btn"
 
-      .content
-        - flash.each do |key, value|
-          = content_tag(:div, value, class: "flash #{key}")
-        = yield
-    .footer
-      = render 'layouts/footer'
-    .footer
-      = debug(params) if Rails.env.development?
+      - flash.each do |key, value|
+        = content_tag(:div, value, class: "flash #{key}")
+      = yield
+    = render 'layouts/footer'
+

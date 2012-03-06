@@ -1,2 +1,17 @@
 - if !(signed_in?)
   =render  file: 'sessions/new'
+-else
+  .span2.columns.text
+    = gravatar_for(current_user, :size => 70)
+    %h1
+      = current_user.name
+  .span3.columns.text
+    %p
+      = "Today I have"
+      = link_to  pluralize(current_user.projects.count,"Project"), projects_path
+      = "and"
+      = link_to  pluralize(current_user.lists.count,"List"), lists_path
+    %p
+      =  "I should done " + pluralize( current_user.tasks.count,"task")
+    %p
+      = "I'm pacticipating'in " + pluralize(current_user.projects.count, "project")

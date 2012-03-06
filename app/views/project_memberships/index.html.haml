@@ -2,12 +2,14 @@
   - if @project.members.nil?
     %p There is no member
   - else
-    - @project.members.each do |member|
-      %tr
-        %td
-          = member.name
-        %td
-          =  link_to  "Remove user", destroy_members_project_path(@project, member), confirm: 'Are you sure?', method: :delete
+    .well
+      %table{class: "table"}
+        - @project.members.each do |member|
+          %tr
+            %td
+              = member.name
+            %td
+              =  link_to  "Remove user", destroy_members_project_path(@project, member), confirm: 'Are you sure?', method: :delete
 
   %p
-    =  link_to "Invite user to project", project_path(@project)+'/members/invite'
+    =  link_to "Invite user to project", project_path(@project)+'/members/invite', class: "btn-info"

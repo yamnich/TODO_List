@@ -76,7 +76,6 @@ When /^I sign in with valid data$/ do
 end
 
 Then /^I should see a user profile links$/ do
-  page.should have_content "Profile"
   page.should have_content "Sign out"
   page.should have_content "Projects"
   page.should have_content "Lists"
@@ -108,23 +107,23 @@ Then /^I should be sign in$/ do
 end
 
 Given /^I am logged in$/ do
-  visit '/signout'
+  sign_in valid_user
 end
 
 When /^I sign out$/ do
   visit '/signout'
 end
 
-=begin
+
 When /^I want to edit my account details$/ do
-  find(".container").find("#Settings").find(".main_menu").find(".test").find("li.test1").click
+  click_link('Settings')
   fill_in "Name", with: "New user name"
   fill_in "Email", with: "New email"
   fill_in "Password", with:"Newpassword"
   fill_in "Confirmation", with:"Newpassword"
   click_button "Update"
 end
-=end
+
 
 Then /^I should be sent to sign in page$/ do
   visit '/'
@@ -135,13 +134,20 @@ Then /^I should see success message "([^"]*)"$/ do |arg1|
 end
 
 
-
-
 Then /^I should see an updates profile message$/ do
   page.should have_content "Profile was updated"
 end
 
+Then /^I should see error message "([^"]*)"$/ do |arg1|
+  page.should have_content "There were problems with the following fields:"
+end
 
+
+Then /^I see users edit form$/ do
+  ["Name", "Email", "Password"].each do |el|
+     page.should have_content(el)
+  end
+end
 
 
 

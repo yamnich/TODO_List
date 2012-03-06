@@ -1,15 +1,8 @@
-%header
-  %div{class: "logo"}
-    = image_tag("logo.png", :alt => "LOGO",  :width => 710)
-  %div{id: 'Settings'}
-    %nav{class: "main_menu"}
-      %ul{class: "test"}
-        - if signed_in?
-          %li
-            = link_to "Home", root_path
-          %li
-            = link_to "Profile", current_user
-          %li{class: "test1"}
-            = link_to "Settings", edit_user_path(current_user), class: "test"
-          %li
-            = link_to "Sign out", signout_path, method: :delete
+.row
+  .span8.header
+    = image_tag("logo.png", :alt => "LOGO",  :width => 940)
+  .span8.offset4.gray
+    - if signed_in?
+      = link_to "Home", current_user, class: "btn"
+      = link_to "Settings", edit_user_path(current_user), class: "btn"
+      = link_to "Sign out", signout_path, method: :delete, class: "btn"

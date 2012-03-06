@@ -79,13 +79,13 @@ class TasksController < ApplicationController
       @task.state = "Done"
     end
     if @task.update_attributes(params[:task])
-      flash[:success] = "Task was updated successfully"
+      flash[:success] = "State was changed successfully"
       if !@project.nil? and !@task.executor_id.nil != current_user
         @user = User.find_by_id(@task.executor_id)
         UserMailer.changed(@user, @project.name, @task.name).deliver
       end
     else
-      flash[:error] = "Task was not updated"
+     flash[:error] = "State was not changed"
     end
       redirect_to list_tasks_path(@list)
   end

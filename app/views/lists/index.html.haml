@@ -1,29 +1,35 @@
 .content
   - if !(@project.nil?)
-    %span.project_name
+    %h1
       = @project.name
-      %br
-    =  link_to "Users lists", lists_path
+    %h5
+      =  link_to "Users lists", lists_path
   - else
     =  link_to "Users projects", projects_path
 
   - if @lists.blank?
-    %p There is no list.
+    %h3
+      = "There is no list"
     %br
   - else
-    %table
-      - @lists.each do |list|
-        %tr
-          %td
-            = link_to list.name,list_tasks_path(list)
-          %td
-            =  list.description
-          %td
-            =  link_to "Edit", edit_list_path(list)
-          %td
-            =  link_to "Delete", [@project, list], confirm: 'Are you sure?', method: :delete
-
+    %br
+      .well
+        %table{class: "table table-bordered table-striped"}
+          %tbody
+            - @lists.each do |list|
+              %tr
+                %td
+                  = link_to list.name,list_tasks_path(list)
+                %td
+                  =  list.description
+                %td
+                  =  link_to "Edit", edit_list_path(list)
+                %td
+                  =  link_to "Delete", [@project, list], confirm: 'Are you sure?', method: :delete
+  %br
   - if @project.nil?
-    = link_to "Add the list", new_list_path
+    %h5
+      = link_to "Add the list", new_list_path
   - else
-    = link_to "Add the list to the project", new_project_list_path(@project)
+    %h5
+      = link_to "Add the list to the project", new_project_list_path(@project)

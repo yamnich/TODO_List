@@ -1,34 +1,38 @@
 .content
   -if !(@list.project.nil?)
-    %p
-      %span.project_name
-        = link_to @list.project.name, projects_path
+    %h1
+      = link_to @list.project.name, projects_path
 
-  %p.list_name
+  %h2
     =  @list.name
+  %br
   .task_state
     = link_to "Done ",  list_tasks_url(@list)+'/done'
     = link_to "In work ",  list_tasks_url(@list)+'/in_work'
     = link_to "Show all ",  list_tasks_url(@list)
+  %table{class: "table table-bordered table-striped"}
+    %tbody
+      - @tasks.each do |task|
+        %tr{class:  task.state == "Done" ? 'done' : 'in_work' }
+          %td
+            %strong
+              = task.name
+          %td
+            = task.description
+          %td
+            = task.priority
+          %td
+            = task.executor.name if !task.executor.nil?
+          %td
+            = link_to task.state, change_state_list_task_url(@list,task)
+        %table{class: "table"}
+          %tr
+            %td
+              = link_to "Edit", edit_list_task_path(@list,task)
+            %td
+              = link_to "Delete",[ @list, task] , confirm: 'Are you sure?', method: :delete
 
-  - @tasks.each do |task|
-    %tr{class:  task.state == "Done" ? 'done' : 'in_work' }
-      %td
-        %b
-          = task.name
-      %td
-        = task.description
-      %td
-        = task.priority
-      %td
-        = task.executor.name if !task.executor.nil?
-      %td
-        = link_to task.state, change_state_list_task_url(@list,task)
-    %tr
-      %td
-        = link_to "Edit", edit_list_task_path(@list,task)
-      %td
-        = link_to "Delete",[ @list, task] , confirm: 'Are you sure?', method: :delete
 
-    %br
-  = link_to "Add the task", new_list_task_path(@list)
+  %br
+  %h5
+    = link_to "Add the task", new_list_task_path(@list)

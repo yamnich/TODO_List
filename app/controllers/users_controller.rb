@@ -74,4 +74,8 @@ class UsersController < ApplicationController
       redirect_to (root_path) unless current_user.admin?
     end
 
+    def own_project(user)
+      @projects = Project.where("user_id = ?", user.id)
+    end
+
 end

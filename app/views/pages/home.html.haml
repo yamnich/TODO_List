@@ -8,7 +8,7 @@
   .span3.columns.text
     %p
       = "Today I have"
-      = link_to  pluralize(current_user.projects.count,"Project"), projects_path
+      = link_to  pluralize(Project.where("user_id = ?", current_user.id).count,"Project"), projects_path
       = "and"
       = link_to  pluralize(current_user.lists.count,"List"), lists_path
     %p

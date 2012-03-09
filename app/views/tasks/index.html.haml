@@ -3,14 +3,27 @@
     %h1
       = link_to @list.project.name, projects_path
 
-  %h2
+  %h3
     =  @list.name
   %br
   .task_state
-    = link_to "Done ",  list_tasks_url(@list)+'/done'
-    = link_to "In work ",  list_tasks_url(@list)+'/in_work'
-    = link_to "Show all ",  list_tasks_url(@list)
-  %table{class: "table table-bordered table-striped"}
+    = link_to "Done ",  list_tasks_url(@list)+'/done', class: "btn btn-success"
+    = link_to "In work ",  list_tasks_url(@list)+'/in_work', class: "btn btn-warning"
+    = link_to "Show all ",  list_tasks_url(@list), class: "btn btn-primary"
+  %br
+  %table.table.table-striped
+    %thead
+      %tr
+        %th
+          = "Task"
+        %th
+          = "Description"
+        %th
+          = "Priority"
+        %th
+          = "Executor"
+        %th
+          = "State"
     %tbody
       - @tasks.each do |task|
         %tr{class:  task.state == "Done" ? 'done' : 'in_work' }
@@ -25,13 +38,18 @@
             = task.executor.name if !task.executor.nil?
           %td
             = link_to task.state, change_state_list_task_url(@list,task)
-        %table{class: "table"}
-          %tr
-            %td
-              = link_to "Edit", edit_list_task_path(@list,task)
-            %td
-              = link_to "Delete",[ @list, task] , confirm: 'Are you sure?', method: :delete
-
+          %td
+            .btn-group.pull-right
+              != '<a class="btn btn-info" href="#">You can</a>'
+              != '<a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">'
+              %span.caret
+              != '</a>'
+              %ul.dropdown-menu
+                %li
+                  = link_to "Edit task", edit_list_task_path(@list,task)
+                %li
+                  = link_to "Delete task",[ @list, task] , confirm: 'Are you sure?', method: :delete
+          %td
 
   %br
   %h5

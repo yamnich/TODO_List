@@ -2,10 +2,15 @@
   - if !(@project.nil?)
     %h1
       = @project.name
+    %br
     %h5
       =  link_to "Users lists", lists_path
   - else
-    =  link_to "Users projects", projects_path
+    %h1
+      = "Lists"
+    %br
+    %h5
+      =  link_to "Users projects", projects_path
 
   - if @lists.blank?
     %h3
@@ -14,7 +19,12 @@
   - else
     %br
       .well
-        %table{class: "table table-bordered table-striped"}
+        %table.table.table-striped
+          %thead
+            %th
+              = "List"
+            %th
+              = "Description"
           %tbody
             - @lists.each do |list|
               %tr
@@ -23,10 +33,17 @@
                 %td
                   =  list.description
                 %td
-                  =  link_to "Edit", edit_list_path(list)
+                  .btn-group.pull-right
+                    != '<a class="btn btn-info" href="#">You can</a>'
+                    != '<a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">'
+                    %span.caret
+                    != '</a>'
+                    %ul.dropdown-menu
+                      %li
+                        =  link_to "Edit list", edit_list_path(list)
+                      %li
+                        =  link_to "Delete list", [@project, list], confirm: 'Are you sure?', method: :delete
                 %td
-                  =  link_to "Delete", [@project, list], confirm: 'Are you sure?', method: :delete
-  %br
   - if @project.nil?
     %h5
       = link_to "Add the list", new_list_path

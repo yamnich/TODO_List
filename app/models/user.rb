@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   attr_accessible :name, :email, :password, :password_confirmation
+  has_many :projects
 
   has_many :project_memberships, foreign_key: 'member_id'
   has_many :projects, through: :project_memberships

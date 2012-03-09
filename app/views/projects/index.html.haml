@@ -6,7 +6,12 @@
     =  link_to "User lists", lists_path
   %br
   .well
-    %table{class: "table table-bordered table-striped"}
+    %table.table.table-striped
+      %thead
+        %th
+          = "Project"
+        %th
+          = "Description"
       %tbody
         %tr
           - @projects.each do |project|
@@ -16,13 +21,21 @@
               %td
                 =  project.description
               %td
-                =  link_to "Edit", edit_project_path( project)
+                .btn-group.pull-right
+                  != '<a class="btn btn-info" href="#">You can</a>'
+                  != '<a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">'
+                  %span.caret
+                  != '</a>'
+                  %ul.dropdown-menu
+                    %li
+                      =  link_to "Edit project", edit_project_path( project)
+                    %li
+                      =  link_to "Delete project", [project], confirm: 'Are you sure?', method: :delete
+                    %li
+                      =  link_to "Look through the members list", project_path(project)+'/members'
               %td
-                =  link_to "Delete", [project], confirm: 'Are you sure?', method: :delete
-              %td
-                =  link_to "Members", project_path(project)+'/members'
-        %table
   %br
     %h5
       =  link_to "Add new project", new_project_path
+
 

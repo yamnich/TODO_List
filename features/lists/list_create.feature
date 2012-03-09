@@ -4,15 +4,16 @@ Feature: Creation of new list
   I should be able to create new list
   In order to organize my tasks
 
-  Scenario: Unauthorized user can't create list
-    Given I am not logged in
-    When I go to the new list page
-    Then I sign out
+  Background:
+    Given I exist as a user
 
-  Scenario: Authorized user can create list with the name
-    Given I am logged in
+  #Scenario: Unauthorized user can't create list
+   # Given I am not logged in
+    #When I go to the new list page
+    #Then I sign out
+
+  @selenium,@javascript
+  Scenario: Authorized user can create list with valid data
     When I go to the new list page
-    And I create new list with name "My Project"
-    Then A project "My List" should exist
-    And I should visit lists path
-    And I should see "My List" on lists path
+    And I create new list with valid data
+    Then I should see new list on list index path

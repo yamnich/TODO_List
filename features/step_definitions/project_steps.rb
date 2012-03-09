@@ -40,13 +40,9 @@ When /^I update project with invalid data$/ do
 end
 
 When /^I delete project$/ do
-
-  project_data = valid_project
-  project = Project.find_by_name(project_data[:name])
+  page.evaluate_script('window.confirm = function(){return true;}')
   click_link "Delete"
 end
 
-Then /^I should not see deleted project in projects list$/ do
-  pending # express the regexp above with the code you wish you had
-end
+
 

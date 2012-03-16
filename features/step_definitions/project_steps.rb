@@ -41,7 +41,7 @@ end
 
 When /^I delete project$/ do
   page.evaluate_script('window.confirm = function(){return true;}')
-  click_link "Delete"
+  click_link "You can"
 end
 
 

@@ -2,7 +2,7 @@ class ListsController < ApplicationController
 
   def new
     @title = "New List"
-    if !(params[:project_id].nil?)
+    if params[:project_id]
       @project = Project.find(params[:project_id])
       @list = @project.lists.build
     else
@@ -13,15 +13,12 @@ class ListsController < ApplicationController
 
   def index
     @title = "Index List"
-    if !(params[:project_id].nil?)
+    if params[:project_id]
       @project = Project.find(params[:project_id])
       @lists = @project.lists.all
     else
-    #@lists = current_user.lists.where("project_id = 'nil'")
-    @lists = current_user.lists.all
-
+      @lists = current_user.lists.all
     end
-
   end
 
   def show
@@ -40,8 +37,14 @@ def update
     @title = "Update List"
     @list = List.find(params[:id])
     if @list.update_attributes(params[:list])
+      flash[:success] = 'List was successfully updated'
+      if params[:project_id]
+        redirect_to project_lists_path(@project)
+      else
         redirect_to lists_path
+      end
     else
+      flash[:error] = "List wasn't update successfully updated"
       render 'edit'
     end
   end
@@ -50,16 +53,19 @@ def update
   def create
     @title = "Create List"
     @list=List.new(params[:list])
-    @list.project_id = params[:project_id]
+    if params[:project_id]
+      @list.project_id = params[:project_id]
+    end
     @list.user_id = current_user.id
     if @list.save
-      flash[:notice] = 'List was successfully created'
-      if !(params[:project_id].nil?)
+      flash[:success] = 'List was successfully created'
+      if params[:project_id]
         redirect_to project_lists_path(@project)
       else
         redirect_to lists_path
       end
     else
+      flash[:error] = "List wasn't create successfully created"
       render 'new'
     end
   end
@@ -67,12 +73,19 @@ def update
 
   def destroy
     @list=List.find(params[:id])
-    @list.destroy
-    flash[:success] = "List is destroyed."
-     if !(params[:project_id].nil?)
+  #  if @list.user_id != current_user.id
+   #   redirect_to 'sessions#new'
+    #else
+     if @list.destroy
+      flash[:success] = "List is destroyed."
+      if params[:project_id]
         redirect_to project_lists_path(@project)
-     else
+      else
         redirect_to lists_path
+      end
+     else
+       flash[:error] = "List wasn't destroyed."
      end
+#    end
   end
 end

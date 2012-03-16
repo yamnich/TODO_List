@@ -7,11 +7,6 @@ Feature: Creation of new project
     Given I exist as a user
     And I am logged in
 
-  #@selenium, @javascript
-  #Scenario: Unauthorized user can't create s project
-   # Given I am not logged in
-   # When I go to the new project page
-   # Then I should be sign out
   @selenium,@javascript
   Scenario: Authorized user can create project with valid data
     When I go to the new project page

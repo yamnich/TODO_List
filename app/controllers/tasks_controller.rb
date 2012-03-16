@@ -13,18 +13,23 @@ class TasksController < ApplicationController
   end
 
   def create
-    @list = List.find(params[:list_id])
-    @task = @list.tasks.build(params[:task])
     @title = 'Creating task'
+    @list = List.find(params[:list_id])
+    @task = @list.tasks.new(params[:task])
     if @task.save
-      flash[:notice] = 'Task was successfully created'
+      flash[:success] = 'Task was successfully created'
       if !@task.executor_id != current_user.id
         @user = User.find_by_id(@task.executor_id)
-        @project = @list.project
-        UserMailer.assignment(@user, @project.name, @task.name).deliver
+        if @list.project
+          @project = @list.project
+          UserMailer.assignment(@user, @project.name, @task.name).deliver
+        else
+          UserMailer.assignment(@user, '', @task.name).deliver
+        end
       end
       redirect_to list_tasks_path(@list)
     else
+      flash[:error] = "Task wasn't successfully created"
       render 'new'
     end
   end
@@ -51,13 +56,15 @@ class TasksController < ApplicationController
     @list =List.find(params[:list_id])
     @task = @list.tasks.find(params[:id])
     if @task.update_attributes(params[:task])
-      if !@task.executor_id != current_user.id
+      flash[:success] = "Task is updated"
+      if !@task.executor_id != current_user.id  && !@project.nil?
         @project = @list.project
         @user = User.find_by_id(@task.executor_id)
         UserMailer.assignment(@user, @project.name, @task.name).deliver
       end
       redirect_to list_tasks_path(@list)
     else
+      flash[:error] = "Task is not updated"
       render 'edit'
     end
   end

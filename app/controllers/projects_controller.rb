@@ -24,8 +24,9 @@ class ProjectsController < ApplicationController
 
   def create
     @title = "Create Project"
+    ############################
     #@project = current_user.projects.build(params[:project])
-    @project = Project.create(params[:project])
+    @project = Project.new(params[:project])
     @project.user_id = current_user.id
     if @project.save
       flash[:success] = 'Project was successfully created'
@@ -44,7 +45,7 @@ class ProjectsController < ApplicationController
         flash[:success] = 'Project was successfully updated'
         redirect_to projects_path
       else
-        flash[:error] = "Project wasn't' updated"
+        flash[:error] = "Project wasn't updated"
         render 'edit'
       end
     end

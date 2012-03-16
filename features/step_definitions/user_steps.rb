@@ -116,7 +116,7 @@ end
 
 
 When /^I want to edit my account details$/ do
-  click_link('Settings')
+  click_link('Profile')
   fill_in "Name", with: "New user name"
   fill_in "Email", with: "New email"
   fill_in "Password", with:"Newpassword"

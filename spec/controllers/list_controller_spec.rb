@@ -2,25 +2,7 @@ require 'spec_helper'
 
 describe ListsController do
   render_views
-=begin
-  before(:each) do
-    @user=Factory.create(:user)
-    test_sign_in(@user)
-    @user.stub!(:id).and_return("1")
 
-    @project=mock_model(Project,id: "1", save: true)
-    Project.stub!(:find).with("1").and_return(@project)
-    @project.stub!(:id).and_return("1")
-
-    @params={"name" => "My list", "description" => "dr"}
-    @list=mock_model(List,@params)
-    List.stub!(:new).and_return(@list)
-    @list.stub!(:user_id=).and_return(@user.id)
-    @list.stub!(:project_id=).and_return(@project.id)
-    @list.stub!(:id).and_return("1")
-    List.stub!(:find).with("1").and_return(@list)
-  end
-=end
   def do_create
     post :create, list: @list_params
   end
@@ -234,7 +216,7 @@ describe ListsController do
     end
 
   end
-=begin
+
   describe "DELETE" do
     describe "for authorized user" do
       it "should destroy the project" do
@@ -245,5 +227,5 @@ describe ListsController do
       end
     end
   end
-=end
+
 end

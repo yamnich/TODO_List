@@ -29,25 +29,7 @@
       <file leaf-file-name="tasks_controller_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spec/controllers/tasks_controller_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="4" selection-start="796" selection-end="796" vertical-scroll-proportion="-14.4">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="spec_helper.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spec/spec_helper.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="121" selection-start="1019" selection-end="1019" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tasks_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/tasks_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="127" selection-start="1406" selection-end="1406" vertical-scroll-proportion="0.0">
+            <state line="139" column="8" selection-start="3359" selection-end="3359" vertical-scroll-proportion="-10.96">
               <folding />
             </state>
           </provider>
@@ -71,28 +53,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user_controller_spec.rb" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/spec/controllers/user_controller_spec.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="171" column="115" selection-start="4330" selection-end="4330" vertical-scroll-proportion="0.8183391">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="list_controller_spec.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="list_controller_spec.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/spec/controllers/list_controller_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="4" selection-start="666" selection-end="666" vertical-scroll-proportion="61.914894">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lists_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/lists_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="75" column="141" selection-start="1677" selection-end="1677" vertical-scroll-proportion="0.0">
+            <state line="229" column="0" selection-start="6047" selection-end="6047" vertical-scroll-proportion="0.7996661">
               <folding />
             </state>
           </provider>
@@ -122,11 +86,11 @@
         <option value="$PROJECT_DIR$/app/controllers/lists_controller.rb" />
         <option value="$PROJECT_DIR$/spec/factories/lists.rb" />
         <option value="$PROJECT_DIR$/spec/controllers/project_controller_spec.rb" />
-        <option value="$PROJECT_DIR$/spec/controllers/list_controller_spec.rb" />
-        <option value="$PROJECT_DIR$/spec/controllers/tasks_controller_spec.rb" />
         <option value="$PROJECT_DIR$/spec/spec_helper.rb" />
         <option value="$PROJECT_DIR$/spec/stubs_mocks.rb" />
         <option value="$PROJECT_DIR$/spec/controllers/user_controller_spec.rb" />
+        <option value="$PROJECT_DIR$/spec/controllers/tasks_controller_spec.rb" />
+        <option value="$PROJECT_DIR$/spec/controllers/list_controller_spec.rb" />
       </list>
     </option>
   </component>
@@ -875,13 +839,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/tasks_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="127" selection-start="1406" selection-end="1406" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/projects_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="89" selection-start="339" selection-end="339" vertical-scroll-proportion="0.4152249">
@@ -896,23 +853,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/tasks_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="127" selection-start="1406" selection-end="1406" vertical-scroll-proportion="1.3235294">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/spec_helper.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="121" selection-start="1019" selection-end="1019" vertical-scroll-proportion="0.70069206">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/lists_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="141" selection-start="1677" selection-end="1677" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/controllers/list_controller_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="4" selection-start="666" selection-end="666" vertical-scroll-proportion="61.914894">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/controllers/tasks_controller_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="4" selection-start="796" selection-end="796" vertical-scroll-proportion="-14.4">
+        <state line="75" column="141" selection-start="1677" selection-end="1677" vertical-scroll-proportion="0.56920415">
           <folding />
         </state>
       </provider>
@@ -920,13 +877,6 @@
     <entry file="file://$PROJECT_DIR$/spec/controllers/project_controller_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="161" column="113" selection-start="3733" selection-end="3733" vertical-scroll-proportion="-7.12">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/spec_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="121" selection-start="1019" selection-end="1019" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -940,7 +890,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/controllers/user_controller_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="171" column="115" selection-start="4330" selection-end="4330" vertical-scroll-proportion="0.8183391">
+        <state line="79" column="91" selection-start="1856" selection-end="1856" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/controllers/tasks_controller_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="139" column="8" selection-start="3359" selection-end="3359" vertical-scroll-proportion="-10.96">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/controllers/list_controller_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="229" column="0" selection-start="6047" selection-end="6047" vertical-scroll-proportion="0.7996661">
           <folding />
         </state>
       </provider>

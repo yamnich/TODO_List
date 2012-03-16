@@ -2,27 +2,7 @@ require 'spec_helper'
 
 describe TasksController do
   render_views
-=begin
-  before(:each) do
-    @user=Factory.create(:user)
-    test_sign_in(@user)
-    @user.stub!(:id).and_return("1")
 
-    @list=mock_model(List,id: "1", save: true)
-    @list.stub!(:id).and_return("1")
-    List.stub!(:find).with("1").and_return(@list)
-    @list.stub!(:project).and_return nil
-
-    @params={"name" => "My task", "description" => "d", "state" => "In work", "priority" => "5", "executor_id" => '1', "list_id" =>'1'}
-    @task=mock_model(Task, @params)
-    @task.stub!(:list_id=).and_return(@list.id)
-    @task.stub(:executor_id=).and_return @user.id
-    @task.stub!(:id).and_return("1")
-    @list.stub_chain(:tasks, :find).with("1").and_return(@task)
-    @list.stub_chain(:tasks, :new).and_return @task
-
-  end
-=end
   describe "POST create" do
     def do_create
       post :create, task: @task_params, list_id: @list

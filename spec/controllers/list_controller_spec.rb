@@ -11,15 +11,15 @@ describe ListsController do
     post :create, list: @list_params, project_id: @project.id
   end
 
-  describe "GET 'new'" do
+  describe "GET 'invite'" do
     it "should be successful" do
-      get :new
+      get :invite
       assigns(:title).should == "New List"
     end
 
-    it "should render 'new'" do
-      get :new
-      response.should render_template 'new'
+    it "should render 'invite'" do
+      get :invite
+      response.should render_template 'invite'
     end
   end
 
@@ -28,16 +28,16 @@ describe ListsController do
       get :edit, id: @list.id
       assigns(:title).should == "Edit List"
     end
-    it "should render 'new'" do
+    it "should render 'invite'" do
       get :edit, id: @list.id
       response.should render_template 'edit'
     end
   end
 
-  describe "GET index" do
+  describe "GET members" do
 
     it "should have right title" do
-      get :index
+      get :members
       assigns(:title).should == "Index List"
     end
     before(:each) do
@@ -47,14 +47,14 @@ describe ListsController do
     it "should have lists inside the project" do
       @list.stub!(:project_id).and_return(nil)
       @user.stub_chain(:lists,:all).and_return(@lists)
-      get :index
+      get :members
       assigns(:lists).should == @lists
     end
 
     it "should have lists inside the project" do
       @project.stub_chain(:lists,:all).and_return(@lists)
       @list.stub!(:project_id).and_return(@project.id)
-      get :index, project_id: @project.id
+      get :members, project_id: @project.id
       assigns(:lists).should == @lists
     end
   end
@@ -67,11 +67,11 @@ describe ListsController do
       describe "just list" do
 
         it "should create the list" do
-          List.should_receive(:new).with(@list_params).and_return(@list)
+          List.should_receive(:invite).with(@list_params).and_return(@list)
           do_create
         end
 
-        it "should be redirected to index path" do
+        it "should be redirected to members path" do
           do_create
           response.should redirect_to lists_path
         end
@@ -90,7 +90,7 @@ describe ListsController do
      describe "list in the project"  do
 
        it "should create the list in the project" do
-          List.should_receive(:new).with(@list_params).and_return(@list)
+          List.should_receive(:invite).with(@list_params).and_return(@list)
           do_create_in_project
        end
 
@@ -104,7 +104,7 @@ describe ListsController do
          flash[:success].should eql 'List was successfully created'
        end
 
-       it "should be redirected to index path (in project)" do
+       it "should be redirected to members path (in project)" do
          do_create_in_project
          response.should redirect_to project_lists_path(@project)
        end
@@ -118,7 +118,7 @@ describe ListsController do
       describe "just list" do
 
         it "should create the list" do
-          List.should_receive(:new).with(@list_params).and_return(@list)
+          List.should_receive(:invite).with(@list_params).and_return(@list)
           do_create
         end
 
@@ -127,9 +127,9 @@ describe ListsController do
           do_create
         end
 
-        it "should re-render new" do
+        it "should re-render invite" do
           do_create
-          response.should render_template 'new'
+          response.should render_template 'invite'
         end
 
         it "should have a error flash message" do
@@ -142,7 +142,7 @@ describe ListsController do
 
         it "should create the list in the project" do
 
-          List.should_receive(:new).with(@list_params).and_return(@list)
+          List.should_receive(:invite).with(@list_params).and_return(@list)
           do_create_in_project
         end
 
@@ -156,9 +156,9 @@ describe ListsController do
           flash[:error].should eql "List wasn't create successfully created"
         end
 
-        it "should re-render template 'new'" do
+        it "should re-render template 'invite'" do
           do_create_in_project
-          response.should render_template 'new'
+          response.should render_template 'invite'
         end
       end
 

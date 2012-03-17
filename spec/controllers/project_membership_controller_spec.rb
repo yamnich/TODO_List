@@ -2,18 +2,18 @@ require 'spec_helper'
 
 describe ProjectMembershipsController do
 
-  describe "GET new" do
+  describe "GET invite" do
 
     before(:each)    do
-      get :new, project_id: @project.id
+      get :invite, project_id: @project.id
     end
 
     it "should be successful" do
       assigns(:button_name).should == "Invite"
     end
 
-    it "should render 'new'" do
-      response.should render_template 'new'
+    it "should render 'invite'" do
+      response.should render_template 'invite'
     end
   end
 

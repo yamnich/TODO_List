@@ -6,7 +6,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def assignment(user, project, task)
-    mail(:to => user.email, :subject => "You get new task #{task} in project #{project}")
+    mail(:to => user.email, :subject => "You get invite task #{task} in project #{project}")
   end
 
   def changed(user, project, task)

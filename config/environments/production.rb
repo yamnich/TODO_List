@@ -34,7 +34,7 @@ TodoList::Application.configure do
   # config.log_level = :debug
 
   # Use a different logger for distributed setups
-  # config.logger = SyslogLogger.new
+  # config.logger = SyslogLogger.invite
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store

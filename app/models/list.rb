@@ -2,8 +2,8 @@
 # == Schema Information
 #
 # Table name: lists
-#     <h1>Lists#new</h1>
-#<p>Find me in app/views/lists/new.html.erb</p>
+#     <h1>Lists#invite</h1>
+#<p>Find me in app/views/lists/invite.html.erb</p>
 #
 #  id          :integer         not null, primary key
 #  name        :string(255)

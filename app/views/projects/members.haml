@@ -1,0 +1,16 @@
+.content
+  - if @project.members.nil?
+    %p There is no member
+  - else
+    .well
+      %table{class: "table"}
+        - @project.members.each do |member|
+          %tr
+            %td
+              = member.name
+            %td
+              -if @project.user_id == current_user.id
+                =  link_to  "Remove user", remove_member_from_project_path(@project, member), confirm: 'Are you sure?', method: :delete, class: "btn btn-primary pull-right"
+
+  -if @project.user_id == current_user.id
+    =  link_to "Invite user to project", invite_project_path(@project) , class: "btn btn-info"

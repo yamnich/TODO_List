@@ -57,22 +57,30 @@ class User < ActiveRecord::Base
     projects.where("user_id = ?", self.id).count
   end
 
-     private
+  def own_projects
+    Project.where("user_id = ?", self.id)
+  end
 
-     def encrypt_password
-       self.salt = make_salt unless has_password?(password)
-       self.encrypted_password = encrypt(password)
-     end
+  def projects_invited_in
+    self.projects
+  end
 
-     def encrypt(string)
-       secure_hash("#{salt}--#{string}")
-     end
+  private
 
-     def make_salt
-       secure_hash("#{Time.now.utc}--#{password}")
-     end
+  def encrypt_password
+    self.salt = make_salt unless has_password?(password)
+    self.encrypted_password = encrypt(password)
+  end
 
-     def secure_hash(string)
-       Digest::SHA2.hexdigest(string)
-     end
+  def encrypt(string)
+    secure_hash("#{salt}--#{string}")
+  end
+
+  def make_salt
+    secure_hash("#{Time.now.utc}--#{password}")
+  end
+
+  def secure_hash(string)
+    Digest::SHA2.hexdigest(string)
+  end
 end

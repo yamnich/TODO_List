@@ -3,14 +3,14 @@ require 'spec_helper'
 describe ProjectsController do
   render_views
 
-  describe "GET 'new'" do
+  describe "GET 'invite'" do
     it "should be successful" do
-      get :new
+      get :invite
       assigns(:title).should == "New Project"
     end
-    it "should render 'new'" do
-      get :new
-      response.should render_template 'new'
+    it "should render 'invite'" do
+      get :invite
+      response.should render_template 'invite'
     end
   end
 
@@ -19,20 +19,20 @@ describe ProjectsController do
       get :edit, id: @project.id
       assigns(:title).should == "Edit Project"
     end
-    it "should render 'new'" do
+    it "should render 'invite'" do
       get :edit, id: @project.id
       response.should render_template 'edit'
     end
   end
 =begin
-  describe "GET index" do
+  describe "GET members" do
 
   end
 =end
 
   describe "POST create" do
     before(:each) do
-      Project.stub!(:new).and_return(@project)
+      Project.stub!(:invite).and_return(@project)
     end
 
     def do_create
@@ -46,7 +46,7 @@ describe ProjectsController do
 
 
       it "should create the project" do
-        Project.should_receive(:new).with(@project_params).and_return(@project)
+        Project.should_receive(:invite).with(@project_params).and_return(@project)
         do_create
       end
 
@@ -55,7 +55,7 @@ describe ProjectsController do
         do_create
       end
 
-      it "should be redirected to index path" do
+      it "should be redirected to members path" do
         do_create
         response.should redirect_to projects_path
       end
@@ -74,7 +74,7 @@ describe ProjectsController do
       end
 
       it "should create the project" do
-        Project.should_receive(:new).with(@project_params).and_return(@project)
+        Project.should_receive(:invite).with(@project_params).and_return(@project)
         do_create
       end
 
@@ -83,9 +83,9 @@ describe ProjectsController do
        do_create
       end
 
-      it "should re-render to new" do
+      it "should re-render to invite" do
         do_create
-        response.should render_template 'new'
+        response.should render_template 'invite'
       end
 
       it "should have a error flash notice" do

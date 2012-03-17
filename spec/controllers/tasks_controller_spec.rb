@@ -5,15 +5,15 @@ describe TasksController do
   before(:each) do
     @list.stub!(:project).and_return nil
   end
-  describe "GET new" do
+  describe "GET invite" do
     it "should be successful" do
-      get :new,  list_id: @list
+      get :invite,  list_id: @list
       assigns(:title).should == "New Task"
     end
 
-    it "should render 'new'" do
-      get :new,  list_id: @list
-      response.should render_template 'new'
+    it "should render 'invite'" do
+      get :invite,  list_id: @list
+      response.should render_template 'invite'
     end
   end
 
@@ -22,13 +22,13 @@ describe TasksController do
       get :edit, id: @task.id, list_id: @list.id
       assigns(:title).should == "Edit task"
     end
-    it "should render 'new'" do
+    it "should render 'invite'" do
       get :edit, id: @task.id, list_id: @list
       response.should render_template 'edit'
     end
   end
 
-  describe "GET 'index'" do
+  describe "GET 'members'" do
     before(:each) do
       @task.stub!(:state).and_return('done')
       @tasks = [@task, @task]
@@ -36,7 +36,7 @@ describe TasksController do
       @tasks_in_work = [@task, @task]
       @list.stub!(:tasks).and_return(@tasks)
       @list.stub!(:tasks, :where).and_return(@tasks)
-      get :index, list_id: @list.id
+      get :members, list_id: @list.id
     end
 
     it "should have right title" do
@@ -68,7 +68,7 @@ describe TasksController do
       end
 
       it "should create the task" do
-        @list.tasks.should_receive(:new).with(@task_params).and_return(@task)
+        @list.tasks.should_receive(:invite).with(@task_params).and_return(@task)
         do_create
       end
 
@@ -77,7 +77,7 @@ describe TasksController do
         do_create
       end
 
-      it "should be redirected to index path" do
+      it "should be redirected to members path" do
         do_create
         response.should redirect_to list_tasks_path(@list)
       end
@@ -94,7 +94,7 @@ describe TasksController do
       end
 
       it "should create the task" do
-        @list.tasks.should_receive(:new).with(@task_params).and_return(@task)
+        @list.tasks.should_receive(:invite).with(@task_params).and_return(@task)
         do_create
       end
 
@@ -103,9 +103,9 @@ describe TasksController do
         do_create
       end
 
-      it "should re-render 'new'" do
+      it "should re-render 'invite'" do
         do_create
-        response.should render_template('new')
+        response.should render_template('invite')
       end
       it "should have a error flash notice" do
         do_create

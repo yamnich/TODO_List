@@ -32,10 +32,38 @@
                     %li
                       =  link_to "Delete project", [project], confirm: 'Are you sure?', method: :delete
                     %li
-                      =  link_to "Look through the members list", project_path(project)+'/members'
+                      =  link_to "Look through the members list", members_project_path(project)
               %td
+        %tr
+    %h3
+      = "Projects I am participating in"
+    %table.table.table-striped
+      %thead
+        %th
+          = "Project"
+        %th
+          = "Description"
+        %tbody
+          - @projects_invited_in.each do |project|
+            %tr
+              %td
+                =  link_to project.name, project_lists_path(project)
+              %td
+                =  project.description
+              %td
+                .btn-group.pull-right
+                  != '<a class="btn btn-info" href="#">You can</a>'
+                  != '<a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">'
+                  %span.caret
+                  != '</a>'
+                  %ul.dropdown-menu
+                    %li
+                      =  link_to "Edit project", edit_project_path( project)
+                    %li
+                      =  link_to "Look through the members list", members_project_path(project)
+                    %td
   %br
     %h5
-      =  link_to "Add new project", new_project_path
+      =  link_to "Add project", new_project_path
 
 

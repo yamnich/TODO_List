@@ -1,5 +1,5 @@
 class ProjectMembershipsController < ApplicationController
- def new
+ def invite
    @project_membership=ProjectMembership.new
    @button_name = "Invite"
  end
@@ -12,10 +12,10 @@ class ProjectMembershipsController < ApplicationController
      UserMailer.invite(@member,@project.name).deliver
      flash[:success]="User was invited"
     end
-    redirect_to  project_path(@project)+'/members'
+    redirect_to  project_project_memberships_path(@project)
   end
 
-  def index
+  def members
     @project = Project.find(params[:project_id])
   end
 
@@ -25,7 +25,7 @@ class ProjectMembershipsController < ApplicationController
     @member = User.find(params[:id])
     @member.leave!(@project)
     flash[:success] = "User was deleted from project"
-    redirect_to members_project_url(@project)
+    redirect_to  project_project_memberships_path(@project)
   end
 
 end

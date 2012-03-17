@@ -10,12 +10,12 @@ end
 
 
 When /^I go to the new list page$/ do
-  visit '/lists/new'
+  visit '/lists/invite'
 end
 
 When /^I create new list with valid data$/ do
 
-  visit '/lists/new'
+  visit '/lists/invite'
   create_list valid_list
 end
 

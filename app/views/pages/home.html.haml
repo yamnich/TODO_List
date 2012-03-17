@@ -14,4 +14,5 @@
     %p
       =  "I should done " + pluralize( current_user.tasks.count,"task")
     %p
-      = "I'm pacticipating'in " + pluralize(current_user.projects.count, "project")
+      =  "I'm pacticipating'in "
+      = link_to pluralize(current_user.projects.count, "project") ,projects_path

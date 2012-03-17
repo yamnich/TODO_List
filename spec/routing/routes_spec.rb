@@ -9,26 +9,26 @@ describe "routing to matches" do
     )
   end
 
-  it "routes '/lists/:list_id/tasks/:state'  to 'tasks#index'" do
+  it "routes '/lists/:list_id/tasks/:state'  to 'tasks#members'" do
     { get: '/lists/1/tasks/done' }.should route_to(
       controller: 'tasks',
-      action: 'index',
+      action: 'members',
       list_id: "1",
       state: 'done'     )
   end
 
-  it "routes '/projects/:project_id/members'   to 'project_memberships#index'" do
+  it "routes '/projects/:project_id/members'   to 'project_memberships#members'" do
     { get:'/projects/1/members' }.should route_to(
       controller: 'project_memberships',
-      action: 'index',
+      action: 'members',
       project_id: '1'
       )
   end
 
-  it "routes '/projects/:project_id/members/invite'   to 'project_memberships#new'" do
+  it "routes '/projects/:project_id/members/invite'   to 'project_memberships#invite'" do
     { get:'/projects/1/members/invite' }.should route_to(
        controller: 'project_memberships',
-       action: 'new',
+       action: 'invite',
        project_id: '1'
        )
   end
@@ -50,16 +50,16 @@ describe "routing to matches" do
        )
   end
 
-  it "routes '/signup'   to 'users#new'" do
+  it "routes '/signup'   to 'users#invite'" do
     {get:'/signup' }.should route_to(
       controller: 'users',
-       action: 'new',
+       action: 'invite',
         )
   end
-  it "routes '/signin'   to 'sessions#new'" do
+  it "routes '/signin'   to 'sessions#invite'" do
     { get:'/signin' }.should route_to(
         controller: 'sessions',
-        action: 'new',
+        action: 'invite',
         )
   end
 

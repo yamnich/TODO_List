@@ -1,10 +1,11 @@
 class TasksController < ApplicationController
   respond_to :html, :xml, :json
+  before_filter :authenticate
 
   def new
     @title = "New Task"
     @list =  List.find(params[:list_id])
-    @project=@list.project
+    @project = @list.project
     if !@project.nil?
       @members=@project.members
     end
@@ -18,7 +19,7 @@ class TasksController < ApplicationController
     @task = @list.tasks.new(params[:task])
     if @task.save
       flash[:success] = 'Task was successfully created'
-      if !@task.executor_id != current_user.id
+      if @task.executor_id != current_user.id
         @user = User.find_by_id(@task.executor_id)
         if @list.project
           @project = @list.project
@@ -71,15 +72,14 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @list =List.find(params[:list_id])
-    @task = @list.tasks.find(params[:id])
+    @task = Task.find(params[:id])
     @task.destroy
     flash[:success] = "Task is destroyed."
-    redirect_to list_tasks_path( @list)
+    redirect_to list_tasks_path(@task.list)
   end
 
   def change_state
-    @list =List.find(params[:list_id])
+    current_user.tasks.find(params[:id])
     @task = @list.tasks.find(params[:id])
     if  @task.state == "Done"
       @task.state = "In work"
@@ -98,5 +98,11 @@ class TasksController < ApplicationController
       redirect_to list_tasks_path(@list)
   end
 
+
+  private
+
+  def authenticate
+    deny_access unless signed_in?
+  end
 
 end

@@ -2,13 +2,20 @@ TodoList::Application.routes.draw do
   get "pages/home"
   get "pages/contact"
   get "pages/about"
-  get "users/index"
+  get "users/members"
 
   resources :users, except: [:index]
 
   resources :projects, except: [:show] do
     resources :lists,  except: [:show]
+    member do
+      get 'members'
+      get 'invite'
+      post 'invite_the_user'
+    end
   end
+
+  delete '/projects/:id/members/:member_id' => 'projects#remove_member', as: "remove_member_from_project"
 
   resources :lists, except: [:show] do
     resources :tasks, except: [:show] do
@@ -17,12 +24,9 @@ TodoList::Application.routes.draw do
       end
     end
   end
- resources :sessions, only: [:create]
- match '/lists/:list_id/tasks/:state' => 'tasks#index', state: /(done|in_work)/
- match '/projects/:project_id/members' => 'project_memberships#index', :as => "members_project"
- get  '/projects/:project_id/members/invite' => 'project_memberships#new'
- post   '/projects/:project_id/members/invite' => 'project_memberships#create'
- delete   '/projects/:project_id/members/:id' => 'project_memberships#destroy', :as => "destroy_members_project"
+
+  resources :sessions, only: [:create]
+  match '/lists/:list_id/tasks/:state' => 'tasks#members', state: /(done|in_work)/
 
   match '/signup', :to => 'users#new'
   match '/signin', :to =>  'sessions#new'
@@ -33,7 +37,7 @@ TodoList::Application.routes.draw do
 
 
   # match '/lists/:list_id/tasks/:id', :to => "tasks#destroy"
-  #  match '/lists/:list_id/tasks/:id/new', :to => "tasks#create"
+  #  match '/lists/:list_id/tasks/:id/invite', :to => "tasks#create"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -82,8 +86,8 @@ TodoList::Application.routes.draw do
   #   end
 
   # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  # just remember to delete public/members.html.
+  # root :to => 'welcome#members'
 
   # See how all your routes lay out with "rake routes"
 

@@ -29,8 +29,8 @@ describe SessionsController do
     flash.now[:error].should == 'Invalid email/password combination'
   end
 
-  it "should render template 'new'" do
-    response.should render_template(:new)
+  it "should render template 'invite'" do
+    response.should render_template(:invite)
   end
 
 end

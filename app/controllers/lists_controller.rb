@@ -21,19 +21,13 @@ class ListsController < ApplicationController
     end
   end
 
-  def show
-    @title = "Show List"
-    @list=List.find(params[:id])
-  end
-
-
   def edit
     @title = "Edit List"
     @list=List.find(params[:id])
     @button_name = "Update"
   end
 
-def update
+  def update
     @title = "Update List"
     @list = List.find(params[:id])
     if @list.update_attributes(params[:list])
@@ -73,9 +67,6 @@ def update
 
   def destroy
     @list=List.find(params[:id])
-  #  if @list.user_id != current_user.id
-   #   redirect_to 'sessions#new'
-    #else
      if @list.destroy
       flash[:success] = "List is destroyed."
       if params[:project_id]
@@ -86,6 +77,5 @@ def update
      else
        flash[:error] = "List wasn't destroyed."
      end
-#    end
   end
 end

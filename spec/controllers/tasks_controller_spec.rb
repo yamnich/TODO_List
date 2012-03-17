@@ -1,7 +1,60 @@
 require 'spec_helper'
 
 describe TasksController do
-  render_views
+#  render_views
+  before(:each) do
+    @list.stub!(:project).and_return nil
+  end
+  describe "GET new" do
+    it "should be successful" do
+      get :new,  list_id: @list
+      assigns(:title).should == "New Task"
+    end
+
+    it "should render 'new'" do
+      get :new,  list_id: @list
+      response.should render_template 'new'
+    end
+  end
+
+  describe "GET 'edit'" do
+    it "should be successful" do
+      get :edit, id: @task.id, list_id: @list.id
+      assigns(:title).should == "Edit task"
+    end
+    it "should render 'new'" do
+      get :edit, id: @task.id, list_id: @list
+      response.should render_template 'edit'
+    end
+  end
+
+  describe "GET 'index'" do
+    before(:each) do
+      @task.stub!(:state).and_return('done')
+      @tasks = [@task, @task]
+      @task.stub!(:state).and_return('in_work')
+      @tasks_in_work = [@task, @task]
+      @list.stub!(:tasks).and_return(@tasks)
+      @list.stub!(:tasks, :where).and_return(@tasks)
+      get :index, list_id: @list.id
+    end
+
+    it "should have right title" do
+      assigns(:title).should == "Index task"
+    end
+
+    it "should get all  tasks" do
+      assigns(:tasks).should == @tasks
+    end
+
+    it "should get done tasks" do
+      assigns(:tasks).should == @tasks
+    end
+
+    it "should get in work tasks" do
+      assigns(:tasks).should == @tasks_in_work
+    end
+  end
 
   describe "POST create" do
     def do_create
@@ -137,29 +190,26 @@ describe TasksController do
     end
 
     end
-=begin
+
   describe "should change task state" do
-     before(:each) do
-       @list=mock_model(List,id: "1", save: true)
-       List.stub!(:find).with("1").and_return(@list)
-       @list.stub!(:id).and_return("1")
-       @params={"name" => "My task", "description" => "d", "state" => "In work", "priority" => "5", "executor_id" => '1', "list_id" =>'1'}
-       @task=mock_model(Task, @params)
-       @task.stub!(:save).and_return(true)
-       @task.stub!(:update_attributes).and_return(true)
-       @task.stub!(:list_id=).and_return(@list.id)
-       @task.stub!(:state=).and_return('Done')
-       @task.stub!(:change_state).and_return('In work')
-       @task.stub!(:id).and_return("1")
-       @list.stub_chain(:tasks,:find).with('1').and_return(@task)
+    before(:each) do
+      @task.stub!(:state=).and_return('In work')
+      @task.stub!(:state).and_return('Done')
+    end
 
-     end
+    it "should change task state" do
+      @task.stub!(:update_attributes).and_return(true)
+      get :change_state, id: @task, list_id: @list.id
+      flash[:success].should == "State was changed successfully"
+    end
 
-    it "should change task state to 'In work'" do
-      @task.should_receive(:change_state).and_return('In work')
+    it "should not change task state" do
+      @task.stub!(:update_attributes).and_return(false)
+      get :change_state, id: @task, list_id: @list.id
+      flash[:error].should ==  "State was not changed"
     end
   end
-=end
+
 end
 
 

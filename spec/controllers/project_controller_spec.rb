@@ -3,30 +3,32 @@ require 'spec_helper'
 describe ProjectsController do
   render_views
 
-=begin
-  before(:each) do
-    @user=Factory.create(:user)
-    test_sign_in(@user)
-    @user.stub!(:id).and_return("1")
-
-    @params={"name" => "My project","description"=>"mp"}
-    @project=mock_model(Project, @params)
-    @project.stub!(:user_id=).and_return(@user.id)
-
-    @project.stub!(:id).and_return("1")
-    Project.stub!(:find).with("1").and_return(@project)
-
-  end
-=end
-
-
   describe "GET 'new'" do
     it "should be successful" do
       get :new
       assigns(:title).should == "New Project"
+    end
+    it "should render 'new'" do
+      get :new
       response.should render_template 'new'
     end
   end
+
+  describe "GET 'edit'" do
+    it "should be successful" do
+      get :edit, id: @project.id
+      assigns(:title).should == "Edit Project"
+    end
+    it "should render 'new'" do
+      get :edit, id: @project.id
+      response.should render_template 'edit'
+    end
+  end
+=begin
+  describe "GET index" do
+
+  end
+=end
 
   describe "POST create" do
     before(:each) do
@@ -149,15 +151,15 @@ describe ProjectsController do
         do_update
         flash[:error].should eql "Project wasn't updated"
       end
-
     end
-
   end
-=begin
+
   describe "DELETE" do
 
     before(:each) do
       @project_for_delete=Factory.create(:project)
+      @project_for_delete.stub!(:id).and_return("1")
+      Project.stub!(:find).with("1").and_return(@project_for_delete)
     end
 
     it "should destroy the project" do
@@ -167,17 +169,4 @@ describe ProjectsController do
     end
 
   end
-
-  describe "index" do
-    before do
-      @projects_all=Project.stub!(:all).and_return(@project)
-      @projects=@projects_all.where("user_id = ?",@user.id)
-    end
-    it "should render index template"  do
-      get :index
-      assigns(:projects).should == @project
-      response.should render_template 'index'
-    end
-  end
-=end
 end

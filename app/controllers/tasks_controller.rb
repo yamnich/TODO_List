@@ -2,13 +2,13 @@ class TasksController < ApplicationController
   respond_to :html, :xml, :json
 
   def new
-    @title = "New_Task"
+    @title = "New Task"
     @list =  List.find(params[:list_id])
     @project=@list.project
     if !@project.nil?
       @members=@project.members
     end
-    @task = @list.tasks.build
+    @task = @list.tasks.new
     @button_name = "New"
   end
 
@@ -35,7 +35,7 @@ class TasksController < ApplicationController
   end
 
   def index
-     @title = "index_task"
+     @title = "Index task"
      @list= List.find(params[:list_id])
      if params[:state] == "done"
        @tasks = @list.tasks.where("state = 'Done'")
@@ -47,6 +47,7 @@ class TasksController < ApplicationController
   end
 
   def edit
+    @title = "Edit task"
     @list =List.find(params[:list_id])
     @task = @list.tasks.find(params[:id])
     @button_name = "Update"

@@ -13,6 +13,7 @@ module RSpecControllerStubsMocks
 
       @project.stub!(:id).and_return("1")
       Project.stub!(:find).with("1").and_return(@project)
+      Project.stub!(:where).and_return(@project)
 
       @list_params={"name" => "My list", "description" => "dr"}
       @list=mock_model(List,@list_params)
@@ -21,8 +22,6 @@ module RSpecControllerStubsMocks
       @list.stub!(:project_id=).and_return(@project.id)
       @list.stub!(:id).and_return("1")
       List.stub!(:find).with("1").and_return(@list)
-
-      @list.stub!(:project).and_return nil
 
       @task_params={"name" => "My task", "description" => "d", "state" => "In work", "priority" => "5", "executor_id" => '1', "list_id" =>'1'}
       @task=mock_model(Task, @task_params)

@@ -5,6 +5,7 @@ TodoList::Application.routes.draw do
   get "users/index"
 
   resources :users, except: [:index]
+
   resources :projects, except: [:show] do
     resources :lists,  except: [:show]
   end

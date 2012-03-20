@@ -8,7 +8,7 @@
     = f.text_area :description, rows: 5
   .field
     = f.label "Done"
-    = f.check_box :state,{}, "Done", "In work"
+    = f.check_box :state, {}, :done, :in_work
   .field
     = f.label :priority
     = f.select :priority, 1..5

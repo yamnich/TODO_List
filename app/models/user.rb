@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :lists,  dependent: :destroy
 
   has_many :tasks, foreign_key: 'executor_id'
+  has_many :tasks
 
   email_regex=/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

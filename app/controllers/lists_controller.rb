@@ -7,7 +7,7 @@ class ListsController < ApplicationController
       @project = current_user.own_projects.find(params[:project_id])
       @list = @project.lists.build
     else
-      @list = current_user.lists.build
+      @list = current_user.lists.new
     end
    @button_name = "New"
   end
@@ -28,7 +28,7 @@ class ListsController < ApplicationController
         redirect_to lists_path
       end
     else
-      flash[:error] = "List wasn't  successfully created"
+      flash[:error] = "List wasn't successfully created"
       render 'new'
     end
   end

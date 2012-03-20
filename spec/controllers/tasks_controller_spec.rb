@@ -5,15 +5,15 @@ describe TasksController do
   before(:each) do
     @list.stub!(:project).and_return nil
   end
-  describe "GET invite" do
+  describe "GET 'new'" do
     it "should be successful" do
-      get :invite,  list_id: @list
+      get :new,  list_id: @list
       assigns(:title).should == "New Task"
     end
 
-    it "should render 'invite'" do
-      get :invite,  list_id: @list
-      response.should render_template 'invite'
+    it "should render 'new'" do
+      get :new,  list_id: @list
+      response.should render_template 'new'
     end
   end
 
@@ -28,7 +28,7 @@ describe TasksController do
     end
   end
 
-  describe "GET 'members'" do
+  describe "GET 'create'" do
     before(:each) do
       @task.stub!(:state).and_return('done')
       @tasks = [@task, @task]
@@ -36,7 +36,7 @@ describe TasksController do
       @tasks_in_work = [@task, @task]
       @list.stub!(:tasks).and_return(@tasks)
       @list.stub!(:tasks, :where).and_return(@tasks)
-      get :members, list_id: @list.id
+      get :create, list_id: @list.id
     end
 
     it "should have right title" do
@@ -68,7 +68,7 @@ describe TasksController do
       end
 
       it "should create the task" do
-        @list.tasks.should_receive(:invite).with(@task_params).and_return(@task)
+        @list.tasks.should_receive(:new).with(@task_params).and_return(@task)
         do_create
       end
 
@@ -94,7 +94,7 @@ describe TasksController do
       end
 
       it "should create the task" do
-        @list.tasks.should_receive(:invite).with(@task_params).and_return(@task)
+        @list.tasks.should_receive(:new).with(@task_params).and_return(@task)
         do_create
       end
 

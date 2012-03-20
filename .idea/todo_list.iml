@@ -80,6 +80,7 @@
     <orderEntry type="library" scope="PROVIDED" name="spork (v0.9.0.rc8, RVM: ruby-1.9.3-p0 [todo_list_gem]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets (v2.0.3, RVM: ruby-1.9.3-p0 [todo_list_gem]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sqlite3 (v1.3.5, RVM: ruby-1.9.3-p0 [todo_list_gem]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="state_machine (v1.1.2, RVM: ruby-1.9.3-p0 [todo_list_gem]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="term-ansicolor (v1.0.7, RVM: ruby-1.9.3-p0 [todo_list_gem]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="therubyracer (v0.9.9, RVM: ruby-1.9.3-p0 [todo_list_gem]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v0.14.6, RVM: ruby-1.9.3-p0 [todo_list_gem]) [gem]" level="application" />

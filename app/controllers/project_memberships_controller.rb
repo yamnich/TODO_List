@@ -1,5 +1,6 @@
 class ProjectMembershipsController < ApplicationController
- def invite
+=begin
+  def invite
    @project_membership=ProjectMembership.new
    @button_name = "Invite"
  end
@@ -27,5 +28,5 @@ class ProjectMembershipsController < ApplicationController
     flash[:success] = "User was deleted from project"
     redirect_to  project_project_memberships_path(@project)
   end
-
+=end
 end

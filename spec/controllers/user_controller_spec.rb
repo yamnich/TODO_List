@@ -8,20 +8,20 @@ describe UsersController do
     @user = Factory(:user)
   end
 
-  describe "GET 'invite'" do
+  describe "GET 'new'" do
 
     it "it should be successful" do
-      get :invite
+      get :new
       response.should be_success
     end
 
     it "should have the right title" do
-      get :invite
+      get :new
       response.should have_selector("title", content: 'Sign up')
     end
 
     it "should have a name field" do
-      get :invite
+      get :new
       response.should have_selector("input[name='user[name]'][type='text']")
     end
 
@@ -40,9 +40,9 @@ describe UsersController do
 
       end
 
-      it "should render the 'invite' page" do
+      it "should render the 'new' page" do
         post :create, user: @attr
-        response.should render_template('invite')
+        response.should render_template('new')
       end
 
       it "should have the right title" do

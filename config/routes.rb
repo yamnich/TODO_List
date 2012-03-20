@@ -26,7 +26,7 @@ TodoList::Application.routes.draw do
   end
 
   resources :sessions, only: [:create]
-  match '/lists/:list_id/tasks/:state' => 'tasks#members', state: /(done|in_work)/
+  match '/lists/:list_id/tasks/:state' => 'tasks#index', state: /(done|in_work)/
 
   match '/signup', :to => 'users#new'
   match '/signin', :to =>  'sessions#new'

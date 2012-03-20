@@ -6,7 +6,7 @@ class TasksController < ApplicationController
     @title = "New Task"
     @list =  List.find(params[:list_id])
     @project = @list.project
-    if !@project.nil?
+    if @project
       @members=@project.members
     end
     @task = @list.tasks.new
@@ -15,19 +15,10 @@ class TasksController < ApplicationController
 
   def create
     @title = 'Creating task'
-    @list = List.find(params[:list_id])
-    @task = @list.tasks.new(params[:task])
+    @task = current_user.lists.find(params[:list_id]).tasks.new(params[:task])
     if @task.save
       flash[:success] = 'Task was successfully created'
-      if @task.executor_id != current_user.id
-        @user = User.find_by_id(@task.executor_id)
-        if @list.project
-          @project = @list.project
-          UserMailer.assignment(@user, @project.name, @task.name).deliver
-        else
-          UserMailer.assignment(@user, '', @task.name).deliver
-        end
-      end
+      #@task.send_email
       redirect_to list_tasks_path(@list)
     else
       flash[:error] = "Task wasn't successfully created"
@@ -39,9 +30,9 @@ class TasksController < ApplicationController
      @title = "Index task"
      @list= List.find(params[:list_id])
      if params[:state] == "done"
-       @tasks = @list.tasks.where("state = 'Done'")
+       @tasks = @list.tasks.where("state = 'done'")
      elsif params[:state] == "in_work"
-       @tasks = @list.tasks.where("state = 'In work'")
+       @tasks = @list.tasks.where("state = 'in_work'")
      else
        @tasks = @list.tasks
      end
@@ -59,11 +50,7 @@ class TasksController < ApplicationController
     @task = @list.tasks.find(params[:id])
     if @task.update_attributes(params[:task])
       flash[:success] = "Task is updated"
-      if !@task.executor_id != current_user.id  && !@project.nil?
-        @project = @list.project
-        @user = User.find_by_id(@task.executor_id)
-        UserMailer.assignment(@user, @project.name, @task.name).deliver
-      end
+      @task.send_email
       redirect_to list_tasks_path(@list)
     else
       flash[:error] = "Task is not updated"
@@ -79,23 +66,16 @@ class TasksController < ApplicationController
   end
 
   def change_state
-    current_user.tasks.find(params[:id])
+    #current_user.tasks.find(params[:id])
+    @list = List.find(params[:list_id])
     @task = @list.tasks.find(params[:id])
-    if  @task.state == "Done"
-      @task.state = "In work"
-    else
-      @task.state = "Done"
-    end
+    @task.change_state
     if @task.update_attributes(params[:task])
       flash[:success] = "State was changed successfully"
-      if !@project.nil? and !@task.executor_id.nil != current_user
-        @user = User.find_by_id(@task.executor_id)
-        UserMailer.changed(@user, @project.name, @task.name).deliver
-      end
     else
-     flash[:error] = "State was not changed"
+      flash[:error] = "State was not changed"
     end
-      redirect_to list_tasks_path(@list)
+    redirect_to list_tasks_path(@list)
   end
 
 

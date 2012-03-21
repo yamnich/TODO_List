@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   respond_to :html, :xml, :json
-  before_filter :authenticate
+ # before_filter :authenticate
 
   def new
     @title = "New Task"
@@ -50,7 +50,7 @@ class TasksController < ApplicationController
     @task = @list.tasks.find(params[:id])
     if @task.update_attributes(params[:task])
       flash[:success] = "Task is updated"
-      @task.send_email
+      #@task.send_email
       redirect_to list_tasks_path(@list)
     else
       flash[:error] = "Task is not updated"
@@ -79,10 +79,10 @@ class TasksController < ApplicationController
   end
 
 
-  private
+  #private
 
-  def authenticate
-    deny_access unless signed_in?
-  end
+  #def authenticate
+ #   deny_access unless signed_in?
+  #end
 
 end

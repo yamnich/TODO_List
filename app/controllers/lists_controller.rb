@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_filter :authenticate
+ # before_filter :authenticate
 
   def new
     @title = "New List"
@@ -79,7 +79,7 @@ class ListsController < ApplicationController
      end
   end
 
-  def authenticate
-    deny_access unless signed_in?
-  end
+  #def authenticate
+  #  deny_access unless signed_in?
+  #end
 end

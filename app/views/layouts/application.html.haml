@@ -15,10 +15,10 @@
             %h1
               ="TODO_List"
         .btn-group.pull-right
-          - if signed_in?
-            = link_to "Home", current_user, class: "btn"
-            = link_to "Profile", edit_user_path(current_user), class: "btn"
-            = link_to "Sign out", signout_path, method: :delete, class: "btn"
+          - if user_signed_in?
+            = link_to "Home", pages_home_path, class: "btn"
+            = link_to "Profile", edit_user_registration_path(current_user), class: "btn"
+            = link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn"
       %br
       - flash.each do |key, value|
         = content_tag(:div, value, class: "flash #{key}")

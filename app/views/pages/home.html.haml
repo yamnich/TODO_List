@@ -1,5 +1,5 @@
-- if !(signed_in?)
-  =render  file: 'sessions/new'
+- if !(user_signed_in?)
+  =render  file: 'devise/sessions/new'
 -else
   .span2.columns.text
     = gravatar_for(current_user, :size => 70)
@@ -8,11 +8,11 @@
   .span3.columns.text
     %p
       = "Today I have"
-      = link_to  pluralize(Project.where("user_id = ?", current_user.id).count,"Project"), projects_path
+      = link_to  pluralize(current_user.own_projects.count,"Project"), projects_path
       = "and"
       = link_to  pluralize(current_user.lists.count,"List"), lists_path
     %p
-      =  "I should done " + pluralize( current_user.tasks.count,"task")
+      = "I should done " + pluralize( current_user.tasks.count,"task")
     %p
       =  "I'm pacticipating'in "
       = link_to pluralize(current_user.projects.count, "project") ,projects_path

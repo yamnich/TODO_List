@@ -1,9 +1,0 @@
-%h1
- = current_user.name
-= gravatar_for(current_user, :size => 50)
-= link_to  pluralize(current_user.projects.count,"Project"), projects_path
-= link_to  pluralize(current_user.lists.count,"List"), lists_path
-%p
-  =  "I should done " + pluralize( current_user.tasks.count,"task")
-%p
-  = "I'm pacticipating'in " + pluralize(current_user.projects.count, "project")

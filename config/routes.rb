@@ -1,10 +1,10 @@
 TodoList::Application.routes.draw do
+
+  devise_for :users
+
   get "pages/home"
   get "pages/contact"
   get "pages/about"
-  get "users/members"
-
-  resources :users, except: [:index]
 
   resources :projects, except: [:show] do
     resources :lists,  except: [:show]
@@ -27,10 +27,6 @@ TodoList::Application.routes.draw do
 
   resources :sessions, only: [:create]
   match '/lists/:list_id/tasks/:state' => 'tasks#index', state: /(done|in_work)/
-
-  match '/signup', :to => 'users#new'
-  match '/signin', :to =>  'sessions#new'
-  match '/signout', :to => 'sessions#destroy'
 
   root :to => 'pages#home'
 

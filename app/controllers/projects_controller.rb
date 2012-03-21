@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_filter :authenticate
+ # before_filter :authenticate
 
   def new
     @title = "New Project"
@@ -92,11 +92,11 @@ class ProjectsController < ApplicationController
     redirect_to  members_project_path(@project)
   end
 
-  private
+ # private
 
-  def authenticate
-    deny_access unless signed_in?
-  end
+  #def authenticate
+   # deny_access unless signed_in?
+  #end
 
 
 

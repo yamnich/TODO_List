@@ -17,4 +17,8 @@
       = f.label :executor_id
       = f.select :executor_id, options_from_collection_for_select(@members,'id','name')
   .actions
+    -if @task.new_record?
+      - @button_name = "New"
+    -else
+      - @button_name = "Update"
     = f.submit @button_name, class: "btn-info"

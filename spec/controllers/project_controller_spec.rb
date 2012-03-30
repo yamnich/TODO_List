@@ -1,42 +1,49 @@
 require 'spec_helper'
 
 describe ProjectsController do
-  render_views
 
-  describe "GET 'invite'" do
-    it "should be successful" do
-      get :invite
-      assigns(:title).should == "New Project"
+  before(:each) do
+    @user = Factory.create(:user)
+    sign_in @user
+
+    @project = mock_model(Project, id: 1, name: "Project", save: true)
+
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    controller.stub(:current_ability){ @ability }
+    @ability.can :manage, Project
+  end
+
+  describe "GET 'new'" do
+
+    before(:each) do
+      Project.stub!(:new).and_return(@project)
+      get :new
     end
-    it "should render 'invite'" do
-      get :invite
-      response.should render_template 'invite'
+
+    it "should render 'new'" do
+      response.should render_template 'new'
     end
   end
 
   describe "GET 'edit'" do
-    it "should be successful" do
+    before(:each) do
+      Project.stub!(:find).and_return(@project)
       get :edit, id: @project.id
-      assigns(:title).should == "Edit Project"
     end
-    it "should render 'invite'" do
-      get :edit, id: @project.id
+
+    it "should render 'edit'" do
       response.should render_template 'edit'
     end
   end
-=begin
-  describe "GET members" do
-
-  end
-=end
 
   describe "POST create" do
     before(:each) do
-      Project.stub!(:invite).and_return(@project)
+      Project.stub!(:new).and_return(@project)
     end
 
     def do_create
-      post :create, project: @project_params
+      post :create, project: @project
     end
 
     describe "should be successful" do
@@ -46,7 +53,7 @@ describe ProjectsController do
 
 
       it "should create the project" do
-        Project.should_receive(:invite).with(@project_params).and_return(@project)
+        Project.should_receive(:new).and_return(@project)
         do_create
       end
 
@@ -74,7 +81,7 @@ describe ProjectsController do
       end
 
       it "should create the project" do
-        Project.should_receive(:invite).with(@project_params).and_return(@project)
+        Project.should_receive(:new).and_return(@project)
         do_create
       end
 
@@ -83,9 +90,9 @@ describe ProjectsController do
        do_create
       end
 
-      it "should re-render to invite" do
+      it "should re-render to 'new'" do
         do_create
-        response.should render_template 'invite'
+        response.should render_template 'new'
       end
 
       it "should have a error flash notice" do
@@ -98,6 +105,11 @@ describe ProjectsController do
 
   describe "PUT update" do
 
+    before(:each) do
+      Project.stub!(:find).and_return(@project)
+
+    end
+
     def do_update
       put :update, id: @project.id
     end
@@ -108,7 +120,7 @@ describe ProjectsController do
       end
 
       it "should find project and return object" do
-       Project.should_receive(:find).with("1").and_return(@project)
+       Project.should_receive(:find).and_return(@project)
         do_update
       end
 
@@ -169,4 +181,8 @@ describe ProjectsController do
     end
 
   end
+
+
+
+
 end

@@ -8,5 +8,7 @@ class Project < ActiveRecord::Base
 
   validates :name, presence: true
 
-
+  def invite_user(member)
+    UserMailer.invite(member,self.name).deliver
+  end
 end

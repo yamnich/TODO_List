@@ -3,13 +3,17 @@ module RSpecControllerStubsMocks
   included do
     before do
 
-      @user=Factory.create(:user)
-      test_sign_in(@user)
+      #@user=Factory.create(:user)
+      User.stub!(:current_user).and_return(@user=Factory.create(:user))
+      #@user.stub!(sign_in).and_return(@user)
+      sign_in @user
       @user.stub!(:id).and_return("1")
 
       @project_params={"name" => "My project","description"=>"mp"}
       @project=mock_model(Project, @project_params)
       @project.stub!(:user_id=).and_return(@user.id)
+      @project.stub_chain(:members, :include?).and_return(true)
+
 
       @project.stub!(:id).and_return("1")
       Project.stub!(:find).with("1").and_return(@project)

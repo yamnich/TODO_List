@@ -10,7 +10,9 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 
   RSpec.configure do |config|
-    config.include RSpecControllerStubsMocks, type: :controller
+
+  # ### config.include RSpecControllerStubsMocks, type: :controller
+
   # == Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
@@ -19,7 +21,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
   # config.mock_with :flexmock
   # config.mock_with :rr
   config.mock_with :rspec
-
+  config.include Devise::TestHelpers, type: :controller
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

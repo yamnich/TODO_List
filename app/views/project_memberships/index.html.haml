@@ -1,3 +1,4 @@
+-@title = "Project " + @project.name + " members"
 .content
   - if @project.members.nil?
     %p There is no member
@@ -9,7 +10,8 @@
             %td
               = member.name
             %td
-              =  link_to  "Remove user", destroy_members_project_path(@project, member), confirm: 'Are you sure?', method: :delete, class: "btn btn-primary"
+              -if @project.user_id == current_user.id
+                =  link_to  "Remove user", destroy_members_project_path(@project, member), confirm: 'Are you sure?', method: :delete, class: "btn btn-primary pull-right"
 
-  %p
-    =  link_to "Invite user to project", project_path(@project)+'/members/invite', class: "btn btn-info"
+  -if @project.user_id == current_user.id
+    =  link_to "Invite user to project", invite_project_path(@project) , class: "btn btn-info"

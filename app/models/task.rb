@@ -14,15 +14,15 @@ class Task < ActiveRecord::Base
      state :done
 
     event :change_state do
-      transition in_work: :done,  do: :send_email
-      transition done: :in_work, do: :send_email
+      transition in_work: :done,  do: :send_email_to
+      transition done: :in_work, do: :send_email_to
     end
   end
 
-  def send_email
-    if !self.executor_id != current_user.id
+  def send_email_to(user)
+    if self.executor_id != user.id
       user = User.find_by_id(self.executor_id)
-      UserMailer.assignment(user, self.name).deliver
+      UserMailer.assignment(user, self).deliver
     end
   end
 

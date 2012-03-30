@@ -1,7 +1,10 @@
 class ProjectMembership < ActiveRecord::Base
 
-  belongs_to :project #, foreign_key: 'project_id'
+  belongs_to :project
   belongs_to :member, class_name: 'User'
 
-  #attr_accessible :member_id, :project_id
+  validates_uniqueness_of :member_id, scope: :project_id
+
+
+
 end

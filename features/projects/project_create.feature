@@ -5,10 +5,17 @@ Feature: Creation of new project
 
   Background:
     Given I exist as a user
-    And I am logged in
+    And  I sign in with valid data
 
   @selenium,@javascript
   Scenario: Authorized user can create project with valid data
     When I go to the new project page
     And I create new project with valid data
     Then I should see new project on project index path
+
+
+  @selenium,@javascript
+  Scenario: Authorized user can create project with invalid data
+    When I go to the new project page
+    And I create new project with invalid data
+    Then I should see an error message "Project wasn't created"

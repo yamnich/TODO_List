@@ -15,12 +15,12 @@ Feature:
       Given I exist as a user
       And I sign in with valid data
       When I want to edit my account details
-      Then I should see success message "Profile was updated"
+      Then I should see an success message "Profile was updated"
 
    # @selenium, @javascript
     Scenario: User can't edit his profile with invalid data
       Given I exist as a user
       And I sign in with valid data
-      When I want to edit my account details
-      Then I should see error message "There were problems with the following fields:"
+      When I want to edit my account details with invalid data
+      Then I should see an error message "There were problems with the following fields:"
       And I see users edit form

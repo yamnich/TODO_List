@@ -8,14 +8,7 @@ TodoList::Application.routes.draw do
 
   resources :projects, except: [:show] do
     resources :lists,  except: [:show]
-    member do
-      get 'members'
-      get 'invite'
-      post 'invite_the_user'
-    end
   end
-
-  delete '/projects/:id/members/:member_id' => 'projects#remove_member', as: "remove_member_from_project"
 
   resources :lists, except: [:show] do
     resources :tasks, except: [:show] do
@@ -27,7 +20,10 @@ TodoList::Application.routes.draw do
 
   resources :sessions, only: [:create]
   match '/lists/:list_id/tasks/:state' => 'tasks#index', state: /(done|in_work)/
-
+  match '/projects/:project_id/members' => 'project_memberships#index', as: "members_project"
+  get  '/projects/:project_id/members/invite' => 'project_memberships#new', as: "invite_project"
+  post   '/projects/:project_id/members/invite' => 'project_memberships#create', as: "invite_the_user_project"
+  delete   '/projects/:project_id/members/:id' => 'project_memberships#destroy', as: "destroy_members_project"
   root :to => 'pages#home'
 
 

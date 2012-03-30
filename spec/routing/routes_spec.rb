@@ -9,31 +9,21 @@ describe "routing to matches" do
     )
   end
 
-  it "routes '/lists/:list_id/tasks/:state'  to 'tasks#members'" do
+  it "routes '/lists/:list_id/tasks/:state'  to 'tasks#index'" do
     { get: '/lists/1/tasks/done' }.should route_to(
       controller: 'tasks',
-      action: 'members',
+      action: 'index',
       list_id: "1",
       state: 'done'     )
   end
-
-  it "routes '/signup'   to 'users#invite'" do
-    {get:'/signup' }.should route_to(
-      controller: 'users',
-       action: 'new',
-        )
+=begin
+  it "routes delete '/projects/:id/members/:member_id' to 'projects#remove_member'"  do
+    { delete: '/projects/1/members/1'}.should route_to(
+        controller: 'projects',
+        action: 'remove_member',
+        id: "1",
+        member_id: "1"  )
   end
-  it "routes '/signin'   to 'sessions#invite'" do
-    { get:'/signin' }.should route_to(
-        controller: 'sessions',
-        action: 'new',
-        )
-  end
-
-  it "routes '/signout'   to 'sessions#destroy'" do
-    { get:'/signout' }.should route_to(
-       controller: 'sessions',
-       action: 'destroy',
-       )
-  end
-  end
+end
+=end
+end

@@ -7,21 +7,23 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name
 
-  has_many :projects
-
   has_many :project_memberships, foreign_key: 'member_id'
   has_many :projects, through: :project_memberships
 
   has_many :lists,  dependent: :destroy
 
   has_many :tasks, foreign_key: 'executor_id'
+  has_many :tasks
+
+  validates :name, :presence => true,
+            :length => {:maximum=>50}
 
   def member?(project)
     project_memberships.find_by_project_id(project)
   end
 
   def join!(project)
-    project_memberships.create!(project_id: project.id)
+    project_memberships.create(project_id: project.id)
   end
 
   def leave!(project)
@@ -32,8 +34,6 @@ class User < ActiveRecord::Base
     Project.where("user_id = ?", self.id)
   end
 
-  def projects_invited_in
-    self.projects
-  end
+
 
 end

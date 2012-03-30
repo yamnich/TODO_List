@@ -1,5 +1,6 @@
-= form_tag  ({action:  'new', class: 'well'})  do
-  .field
-    = email_field_tag  'email'
-  .actions
-    =button_tag @button_name, class: "btn  btn-info"
+-@title = "Invitation user to project"
+=form_for(@project_membership, url: invite_the_user_project_url, method: :post, class: "well")  do |f|
+ .field
+  = email_field_tag 'email'
+ .actions
+  = f.submit "Invite", class: "btn  btn-info"

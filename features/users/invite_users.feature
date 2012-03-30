@@ -16,6 +16,6 @@ Feature: Ability to invite users to project
     Given I have a project
     And  I go to the projects page
     And I go to project members page
-    When I should see "Invite user" button
-    And Invite user to project
+    #When I should see "Invite user" button
+    And I invite user to project
     Then I see member name on project members page

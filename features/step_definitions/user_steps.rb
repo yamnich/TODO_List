@@ -171,7 +171,7 @@ Then /^I should see "([^"]*)" button$/ do |arg1|
   page.should have_content("Invite user to project")
 end
 
-When /^Invite user to project$/ do
+When /^I invite user to project$/ do
   @other_user = User.create(@invited_user)
   click_link "Invite user to project"
   fill_in "email", with: @other_user.email

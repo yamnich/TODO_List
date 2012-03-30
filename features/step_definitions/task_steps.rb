@@ -31,7 +31,7 @@ When /^I create new task with invalid data$/ do
 end
 
 Given /^I have a task$/ do
-  @task=Task.create!(name: valid_task[:name],list_id: @list.id, priority: "1")
+  @task=Task.create!(name: valid_task[:name],list_id: @list.id, priority: "1", state: :in_work)
 end
 
 Given /^I go to task edit page$/ do
@@ -46,4 +46,24 @@ When /^I update task with invalid data$/ do
   update_task ""
 end
 
+When /^I delete the task$/ do
+  page.evaluate_script('window.confirm = function(){return true;}')
+  click_link "You can"
+end
+
+When /^I change the task state$/ do
+  click_link "in work"
+end
+
+Then /^I should see changed task state$/ do
+  page.should have_content "done"
+end
+
+When /^I click "In work" button$/ do
+  click_link  "In work"
+end
+
+Then /^I see my task on the page$/ do
+  page.should have_content @task.name
+end
 

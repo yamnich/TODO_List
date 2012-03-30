@@ -14,9 +14,14 @@ Feature: Ability to edit task
     When I update task with valid data
     Then I should see an success message "Task was successfully updated"
 
-
-  Scenario: User can't edit the task details with valid data
+  Scenario: User can edit the task details with invalid data
     Given I go to the tasks page
     And I go to task edit page
     When I update task with invalid data
     Then I should see an success message "Task is not updated"
+
+  Scenario: User can change task state
+    Given I go to the tasks page
+    When I change the task state
+    Then I should see an success message "Task was successfully updated"
+    And I should see changed task state

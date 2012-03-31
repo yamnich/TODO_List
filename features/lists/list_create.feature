@@ -19,7 +19,7 @@ Feature: Creation of new list
   Scenario: Authorized user can't create list with invalid data
     When I go to the new list page
     And I create new list with invalid data
-    Then I should see an error message "List wasn't created"
+    Then I should see a message "List wasn't created"
 
   @selenium,@javascript
   Scenario: Authorized user can create list in the project with valid data
@@ -37,4 +37,4 @@ Feature: Creation of new list
     And I go to the project lists page
     And I go to the new list page inside the project
     And I create new list with invalid data
-    Then I should see an error message "List wasn't updated"
+    Then I should see a message "List wasn't created"

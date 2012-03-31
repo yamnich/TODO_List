@@ -40,6 +40,7 @@ end
 
 When /^I delete project$/ do
   page.evaluate_script('window.confirm = function(){return true;}')
+ # find('.dropdown-menu').click_link("Delete project")
   click_link "You can"
 end
 

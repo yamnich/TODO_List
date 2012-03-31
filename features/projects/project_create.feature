@@ -18,4 +18,4 @@ Feature: Creation of new project
   Scenario: Authorized user can create project with invalid data
     When I go to the new project page
     And I create new project with invalid data
-    Then I should see an error message "Project wasn't created"
+    Then I should see a message "Project wasn't created"

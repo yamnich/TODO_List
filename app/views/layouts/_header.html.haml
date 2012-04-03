@@ -3,6 +3,6 @@
     = image_tag("logo.png", :alt => "LOGO",  :width => 940)
   .span8.offset4.gray
     - if signed_in?
-      = link_to "Home", current_user, class: "btn"
-      = link_to "Settings", edit_user_path(current_user), class: "btn"
-      = link_to "Sign out", signout_path, method: :delete, class: "btn"
+      = link_to "Home", root_path, class: "btn"
+      = link_to "Profile", edit_user_registration_path(current_user), class: "btn"
+      = link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn"

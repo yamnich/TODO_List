@@ -1,0 +1,5 @@
+<div id="projects"></div>
+<%- content_for :javascript do %>
+    new TodoList.Routers.AppRouter({projects: <%= @projects.to_json(include: :lists).html_safe %>, projects_invited_in: <%= @projects_invited_in.to_json(include: :lists).html_safe %>})
+    Backbone.history.start()
+<%- end %>

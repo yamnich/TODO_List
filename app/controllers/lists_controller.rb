@@ -5,18 +5,28 @@ class ListsController < ApplicationController
 
   def index
     @project? @lists = @project.lists : @lists = current_user.lists.where("project_id is NULL")
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @lists }
+    end
   end
 
   def new
   end
 
   def create
+    respond_to do  |format|
     if @list.save
-      flash[:success] = 'List was successfully created'
-      @project? redirect_to(project_lists_path(@project)) : redirect_to(lists_path)
+      if @project
+        format.html { redirect_to project_lists_path(@project), success: 'Task list was successfully created' }
+      else
+        format.html { redirect_to lists_path, success: 'Task list was successfully created' }
+      end
+      format.json { render json: @list, status: :created, location: @list }
     else
-      flash[:error] = "List wasn't created"
-      render 'new'
+      format.html { render action: "new", error: "List wasn't created" }
+      format.json { render json: @list.errors, status: :unprocessable_entity }
+    end
     end
   end
 

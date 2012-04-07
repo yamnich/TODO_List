@@ -1,0 +1,38 @@
+<div class = "formcontainer well">
+<h3>Edit task</h3>
+
+<form id="edit-task" name="task">
+
+  <div class="field">
+    <label>Name</label>
+    <input type="text" name = "name"/>
+  </div>
+
+  <div class="field">
+    <label>Description</label>
+    <textarea rows="10" cols="45" name="description"> </textarea>
+  </div>
+
+  <div>
+    <label>Done</label>
+    <input type="checkbox" value = "done">
+  </div>
+
+  <div>
+    <label>Priority</label>
+      <select>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+  </div>
+
+
+  <div class="actions">
+    <input type="submit" value="Update Task"  />
+  </div>
+</form>
+
+<a href="/#/list/#{list_id}/tasks">Back</a>

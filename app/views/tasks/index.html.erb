@@ -1,0 +1,5 @@
+<div id="tasks"></div>
+<%- content_for :javascript do %>
+    new TodoList.Routers.AppRouter({tasks: <%= @tasks.to_json.html_safe %>})
+    Backbone.history.start()
+<%- end %>

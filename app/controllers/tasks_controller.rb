@@ -4,21 +4,30 @@ class TasksController < ApplicationController
 
   def index
     params[:state]? @tasks = @list.tasks.where("state = ?", params[:state]) : @tasks = @list.tasks
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @tasks }
+    end
   end
 
   def new
     @project = @list.project
     @members=@project.members if @project
+
   end
 
   def create
     if @task.save
-      @task.send_email_to(current_user,@project)
-      flash[:success] = 'Task was successfully created'
-      redirect_to list_tasks_path(@list)
-    else
-      flash[:error] = "Task wasn't created"
-      render 'new'
+      #@task.send_email_to(current_user)
+      respond_to do  |format|
+        if @task.save
+          format.html { redirect_to list_tasks_path(@list), success: 'Task was successfully created' }
+          format.json { render json: @task, status: :created, location: @task }
+        else
+          format.html { render action: "new", error: "Task wasn't created" }
+          format.json { render json: @task.errors, status: :unprocessable_entity }
+        end
+      end
     end
   end
 
@@ -26,13 +35,15 @@ class TasksController < ApplicationController
   end
 
   def update
-    if @task.update_attributes(params[:task])
-      flash[:success] = 'Task was successfully updated'
-      @task.send_email_to(@task.executor)
-      redirect_to list_tasks_path(@list)
-    else
-      flash[:error] = "Task wasn't updated"
-      render 'edit'
+    respond_to do |format|
+      if @task.update_attributes(params[:task])
+        #@task.send_email_to(@task.executor)
+        format.html { redirect_to  list_tasks_path(@list), success: 'Task was successfully updated' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" , error: "Task wasn't updated"}
+        format.json { render json: @task.errors,  status: :unprocessable_entity }
+      end
     end
   end
 

@@ -12,6 +12,7 @@ class TodoList.Views.Lists.IndexView extends Backbone.View
       @$("#lists_new").append('<a href = "/#/projects/'+@options.project.attributes.id+'/lists/new" > New list</a>')
     else
       @$("#lists_new").append('<a href = "/#/lists/new" > New list</a>')
+
   addOne: (list) =>
     view = new TodoList.Views.Lists.ListView({model : list})
     @$("#lists").append(view.render().el)

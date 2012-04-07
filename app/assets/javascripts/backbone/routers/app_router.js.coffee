@@ -12,28 +12,37 @@ class TodoList.Routers.AppRouter extends Backbone.Router
 
     @project_lists = new TodoList.Collections.ListsCollection()
 
-  routes:
-    "/projects/new"             : "newProject"
-    "/projects/index"           : "index"
-    "/projects/:id/edit"        : "edit"
-    "/projects/:id/lists"       : "showProjectLists"
-    "/projects"                 : "index"
-    "/projects/.*"              : "index"
-    "/projects/:id/lists/new"   : "newProjectList"
+    @tasks = new TodoList.Collections.TasksCollection()
+    @tasks.reset options.tasks
 
-    "/lists/new"        : "newList"
-    "/lists/index"      : "indexList"
-    "/lists/:id/edit"   : "editList"
-    "/lists/:id"        : "showListTask"
-    "/lists/.*"         : "indexList"
-    "/lists"            : "indexList"
+  routes:
+    "/projects/new"               : "newProject"
+    "/projects/index"             : "indexProject"
+    "/projects/:id/edit"          : "editProject"
+    "/projects/:id/lists"         : "showProjectLists"
+    "/projects"                   : "indexProject"
+    "/projects/.*"                : "indexProject"
+    "/projects/:id/lists/new"     : "newProjectList"
+
+    "/lists/new"                  : "newList"
+    "/lists/index"                : "indexList"
+    "/lists/:id/edit"             : "editList"
+    "/lists/:id/tasks"            : "showListTask"
+    "/lists/.*"                   : "indexList"
+    "/lists"                      : "indexList"
+
+    "/lists/:id/tasks/new"        : "newTask"
+    "/lists/:id/tasks"            : "indexTask"
+    "/lists/:id/tasks/:id/edit"   : "editTask"
+    "/lists/:id/.*"               : "indexTask"
+    "/lists/:id/"                 : "indexTask"
 
 
   newProject: ->
     @view = new TodoList.Views.Projects.NewView(collection: @projects)
     $("#app").html(@view.render().el)
 
-  index: ->
+  indexProject: ->
     @view = new TodoList.Views.Projects.IndexView(projects: @projects, projects_invited_in: @projects_invited_in)
     $("#app").html(@view.render().el)
 
@@ -48,7 +57,7 @@ class TodoList.Routers.AppRouter extends Backbone.Router
     $("#app").html(@view.render().el)
 
 
-  edit: (id) ->
+  editProject: (id) ->
     project = @projects.get(id)
 
     @view = new TodoList.Views.Projects.EditView(model: project)
@@ -80,3 +89,20 @@ class TodoList.Routers.AppRouter extends Backbone.Router
 
     @view = new TodoList.Views.Lists.EditView(model: list)
     $("#app").html(@view.render().el)
+
+  newTask: (id) ->
+    list = @lists.get(id)
+    @view = new TodoList.Views.Tasks.NewView(collection: @tasks, list: list)
+    $("#app").html(@view.render().el)
+
+  indexTask: (id) ->
+    list = @lists.get(id)
+    @view = new TodoList.Views.Tasks.IndexView(tasks: @tasks, list: list)
+    $("#app").html(@view.render().el)
+
+  editTask: (id) ->
+    task = @tasks.get(id)
+
+    @view = new TodoList.Views.Tasks.EditView(model: task)
+    $("#app").html(@view.render().el)
+

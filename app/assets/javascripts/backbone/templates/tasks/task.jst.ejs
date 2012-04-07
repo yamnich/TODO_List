@@ -1,0 +1,27 @@
+<td>
+   <strong><%=name%></strong>
+</td>
+<td>
+  <%= description %>
+</td>
+<td>
+  <%= priority %>
+</td>
+<td>
+  <%= executor_id %>
+</td>
+
+<td>
+  <div class="btn-group pull-right">
+     <a class="btn btn-info" href="#">You can</a >
+     <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
+        <span class="caret"></span>
+     </a>
+     <ul class="dropdown-menu">
+       <li>   <a href="/#/lists/<%=list_id%>/tasks/<%=id%>/edit">Edit task</a></li>
+       <li>   <a href= "/#/lists/<%=list_id%>/tasks/<%=id%>/destroy" class = "destroy">Delete task</a></li>
+
+     </ul>
+  </div>
+
+</td>

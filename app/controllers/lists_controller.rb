@@ -18,9 +18,9 @@ class ListsController < ApplicationController
     respond_to do  |format|
     if @list.save
       if @project
-        format.html { redirect_to project_lists_path(@project), success: 'Task list was successfully created' }
+        format.html { redirect_to project_lists_path(@project), success: 'List was successfully created' }
       else
-        format.html { redirect_to lists_path, success: 'Task list was successfully created' }
+        format.html { redirect_to lists_path, success: 'List was successfully created' }
       end
       format.json { render json: @list, status: :created, location: @list }
     else

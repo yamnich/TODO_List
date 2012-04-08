@@ -1,16 +1,16 @@
-- @title  = "Tasks"
+- @title = "Tasks"
 .content
   -if !(@list.project.nil?)
     %h1
       = link_to @list.project.name, projects_path
 
   %h3
-    =  @list.name
+    = @list.name
   %br
   .task_state
-    = link_to "Done ",  list_tasks_url(@list)+'/done', class: "btn btn-success"
-    = link_to "In work ",  list_tasks_url(@list)+'/in_work', class: "btn btn-warning"
-    = link_to "Show all ",  list_tasks_url(@list), class: "btn btn-primary"
+    = link_to "Done ", list_tasks_url(@list)+'/done', class: "btn btn-success"
+    = link_to "In work ", list_tasks_url(@list)+'/in_work', class: "btn btn-warning"
+    = link_to "Show all ", list_tasks_url(@list), class: "btn btn-primary"
   %br
   %table.table.table-striped
     %thead
@@ -27,7 +27,7 @@
           = "State"
     %tbody
       - @tasks.each do |task|
-        %tr{class:  task.state == "Done" ? 'done' : 'in_work' }
+        %tr{class: task.state == "Done" ? 'done' : 'in_work' }
           %td
             %strong
               = task.name
@@ -55,3 +55,4 @@
   %br
   %h5
     = link_to "Add the task", new_list_task_path(@list)
+

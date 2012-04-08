@@ -114,7 +114,8 @@ Then /^I should be sign in$/ do
 end
 
 When /^I sign out$/ do
-  click_link "Sign out"
+  #find(".navbar").find(".navbar-inner").find("container").find(".nav-collapse").find("nav").find("Sign out").click
+ click_link "Sign out"
 end
 
 

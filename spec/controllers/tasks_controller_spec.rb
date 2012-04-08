@@ -23,9 +23,7 @@ describe TasksController do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
     controller.stub(:current_ability){ @ability }
-    @ability.can :manage, Task
-    @ability.can :manage, List
-    @ability.can :manage, Project
+
   end
 
   describe "GET 'new'" do
@@ -34,46 +32,84 @@ describe TasksController do
       @project.stub!(:members).and_return(@user)
       @list.stub!(:project).and_return(@project)
     end
-
-    it "should render 'new'" do
-      get :new,  list_id: @list
-      response.should render_template 'new'
+    describe "success" do
+      it "should render 'new'" do
+        @ability.can :read, List
+        @ability.can :manage, Task
+        get :new,  list_id: @list
+        response.should render_template 'new'
+      end
+    end
+    describe "failure" do
+      it "should redirect to home page" do
+        @ability.cannot :read, List
+        @ability.cannot :manage, Task
+        get :new,  list_id: @list
+        response.should redirect_to root_path
+      end
     end
   end
 
   describe "GET 'edit'" do
-    it "should render 'edit'" do
-      get :edit, id: @task.id, list_id: @list
-      response.should render_template 'edit'
+    describe "success" do
+      it "should render 'edit'" do
+        @ability.can :read, List
+        @ability.can :manage, Task
+        get :edit, id: @task.id, list_id: @list
+        response.should render_template 'edit'
+      end
+    end
+    describe "failure" do
+      it "should render 'edit'" do
+        @ability.cannot :read, List
+        @ability.cannot :manage, Task
+        get :edit, id: @task.id, list_id: @list
+        response.should redirect_to root_url
+      end
     end
   end
 
   describe "GET 'index'" do
-    before(:each) do
-      @tasks = [@task, @task]
+    describe "failure" do
+      it "should redirect to home page" do
+        @ability.cannot :read, List
+        @ability.cannot :read, Task
+        get :index, list_id: @list
+        response.should redirect_to root_url
+      end
     end
 
-    it "should get all  tasks" do
-      @list.stub!(:tasks).and_return(@tasks)
-      get :index, list_id: @list.id, state: nil
-      assigns(:tasks).should == @tasks
-    end
+    describe "success" do
+      before(:each) do
+        @ability.can :read, List
+        @ability.can :read, Task
+        @tasks = [@task, @task]
+      end
 
-    it "should get done tasks" do
-      @list.stub_chain(:tasks, :where).and_return(@tasks)
-      get :index, list_id: @list.id, state: 'done'
-      assigns(:tasks).should == @tasks
-    end
+      it "should get all  tasks" do
+        @list.stub!(:tasks).and_return(@tasks)
+        get :index, list_id: @list.id, state: nil
+        assigns(:tasks).should == @tasks
+      end
 
-    it "should get in work tasks" do
-      @list.stub_chain(:tasks, :where).and_return(@tasks)
-      get :index, list_id: @list.id, state: 'in_process'
-      assigns(:tasks).should == @tasks
+      it "should get done tasks" do
+        @list.stub_chain(:tasks, :where).and_return(@tasks)
+        get :index, list_id: @list.id, state: 'done'
+        assigns(:tasks).should == @tasks
+      end
+
+      it "should get in work tasks" do
+        @list.stub_chain(:tasks, :where).and_return(@tasks)
+        get :index, list_id: @list.id, state: 'in_process'
+        assigns(:tasks).should == @tasks
+      end
     end
   end
 
   describe "POST create" do
     before(:each) do
+      @ability.can :read, List
+      @ability.can :manage, Task
       Task.stub!(:new).and_return(@task)
     end
 
@@ -135,7 +171,14 @@ describe TasksController do
       end
       it "should have a error flash notice" do
         do_create
-        flash[:error].should eql "Task wasn't successfully created"
+        flash[:error].should eql "Task wasn't created"
+      end
+
+      it "should redirect to home path" do
+        @ability.cannot :read, List
+        @ability.cannot :manage, Task
+        do_create
+        response.should redirect_to root_path
       end
     end
 
@@ -149,8 +192,12 @@ describe TasksController do
     describe "success" do
 
       before(:each) do
+        @ability.can :read, List
+        @ability.can :manage, Task
+
         @task.stub!(:update_attributes).and_return(true)
         @task.stub!(:send_email_to)
+        @task.stub!(:executor)
       end
 
       it "should find task and return object" do
@@ -175,12 +222,15 @@ describe TasksController do
 
       it "should have success message" do
         do_update
-        flash[:success].should eql  "Task is updated"
+        flash[:success].should eql  "Task was successfully updated"
       end
     end
 
     describe "failure" do
       before(:each) do
+        @ability.can :read, List
+        @ability.can :manage, Task
+
         @task.stub!(:update_attributes).and_return(false)
       end
 
@@ -201,13 +251,22 @@ describe TasksController do
 
       it "should have error message" do
         do_update
-        flash[:error].should eql  "Task is not updated"
+        flash[:error].should eql  "Task wasn't updated"
+      end
+
+      it "should redirect to home page " do
+        @ability.cannot :read, List
+        @ability.cannot :manage, Task
+        do_update
+        response.should redirect_to root_path
       end
     end
   end
 
   describe "DELETE" do
     before(:each) do
+      @ability.can :read, List
+      @ability.can :manage, Task
       @task = Factory.create(:task)
 
       @task.stub!(:id).and_return("1")
@@ -220,10 +279,20 @@ describe TasksController do
       }.should change(Task, :count).by(-1)
       response.should  redirect_to list_tasks_path(@list)
     end
+
+    it "should redirect to home page" do
+      @ability.cannot :read, List
+      @ability.cannot :manage, Task
+      delete :destroy, id: @task, list_id: @list
+      response.should redirect_to  root_path
+    end
   end
 
   describe "should change task state" do
     before(:each) do
+      @ability.can :read, List
+      @ability.can :manage, Task
+
       @task.stub!(:change_state)
     end
 
@@ -236,7 +305,7 @@ describe TasksController do
     it "should not change task state" do
       @task.stub!(:update_attributes).and_return(false)
       get :change_state, id: @task, list_id: @list.id
-      flash[:error].should ==  "State was not changed"
+      flash[:error].should ==  "State wasn't changed"
     end
   end
 

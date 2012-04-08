@@ -8,20 +8,40 @@
     = javascript_include_tag "application"
 
   %body
+    .navbar
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.brand
+            =TodoList
+          .nav-collapse
+            %ul.nav
+              - if signed_in?
+                %li
+                  = link_to "Home", pages_home_path
+                %li.devider-vertical
+                %li
+                  = link_to "Profile", edit_user_registration_path(current_user)
+                %li.devider-vertical
+                %li
+                  = link_to "Projects", projects_path
+                %li.devider-vertical
+                %li
+                  = link_to "Lists", lists_path
+                %li.devider-vertical
+                %li
+                  = link_to "Sign out", destroy_user_session_path, method: :delete
+
     .container
-      .row
-        .span10.top
-          .logo
-            %h1
-              ="TODO_List"
-        .btn-group.pull-right
-          - if user_signed_in?
-            = link_to "Home", pages_home_path, class: "btn"
-            = link_to "Profile", edit_user_registration_path(current_user), class: "btn"
-            = link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn"
       %br
       - flash.each do |key, value|
         = content_tag(:div, value, class: "flash #{key}")
       = yield
-    = render 'layouts/footer'
+    .footer
+      .span8.offset2
+      = debug(params) if Rails.env.development?
+
 

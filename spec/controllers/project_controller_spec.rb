@@ -11,34 +11,47 @@ describe ProjectsController do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
     controller.stub(:current_ability){ @ability }
-    @ability.can :manage, Project
   end
 
   describe "GET 'new'" do
 
     before(:each) do
       Project.stub!(:new).and_return(@project)
-      get :new
     end
 
     it "should render 'new'" do
+      @ability.can :manage, Project
+      get :new
       response.should render_template 'new'
+    end
+    it "failure should redirect to home page" do
+      @ability.cannot :manage, Project
+      get :new
+      response.should redirect_to root_path
     end
   end
 
   describe "GET 'edit'" do
     before(:each) do
       Project.stub!(:find).and_return(@project)
-      get :edit, id: @project.id
     end
 
     it "should render 'edit'" do
+      @ability.can :manage, Project
+      get :edit, id: @project.id
       response.should render_template 'edit'
+    end
+
+    it "failure should redirect to home page" do
+      @ability.cannot :manage, Project
+      get :edit, id: @project.id
+      response.should redirect_to root_path
     end
   end
 
   describe "POST create" do
     before(:each) do
+      @ability.can :manage, Project
       Project.stub!(:new).and_return(@project)
     end
 
@@ -73,7 +86,6 @@ describe ProjectsController do
       end
     end
 
-
     describe "failure" do
 
       before(:each) do
@@ -97,17 +109,22 @@ describe ProjectsController do
 
       it "should have a error flash notice" do
         do_create
-        flash[:error].should eql "Project wasn't created. Please try again"
+        flash[:error].should eql "Project wasn't created"
+      end
+
+      it "should redirect to home page" do
+        @ability.cannot :manage, Project
+        do_create
+        response.should redirect_to root_path
       end
 
     end
   end
 
   describe "PUT update" do
-
     before(:each) do
+      @ability.can :manage, Project
       Project.stub!(:find).and_return(@project)
-
     end
 
     def do_update
@@ -163,12 +180,19 @@ describe ProjectsController do
         do_update
         flash[:error].should eql "Project wasn't updated"
       end
+
+      it "should redirect to home page" do
+        @ability.cannot :manage, Project
+        do_update
+        response.should redirect_to root_path
+      end
     end
   end
 
   describe "DELETE" do
 
     before(:each) do
+      @ability.can :manage, Project
       @project_for_delete=Factory.create(:project)
       @project_for_delete.stub!(:id).and_return("1")
       Project.stub!(:find).with("1").and_return(@project_for_delete)
@@ -178,6 +202,12 @@ describe ProjectsController do
       lambda{
         delete :destroy, id: @project_for_delete
       }.should change(Project, :count).by(-1)
+    end
+
+    it "should redirect to home page" do
+      @ability.cannot :manage, Project
+      delete :destroy, id: @project_for_delete
+      response.should redirect_to root_path
     end
 
   end

@@ -6,7 +6,7 @@ class ListsController < ApplicationController
   def index
     @project? @lists = @project.lists : @lists = current_user.lists.where("project_id is NULL")
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @lists }
     end
   end

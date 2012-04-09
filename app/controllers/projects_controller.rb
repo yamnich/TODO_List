@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
     @projects = current_user.own_projects
     @projects_invited_in = current_user.projects
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @projects }
     end
   end

@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   def index
     params[:state]? @tasks = @list.tasks.where("state = ?", params[:state]) : @tasks = @list.tasks
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @tasks }
     end
   end

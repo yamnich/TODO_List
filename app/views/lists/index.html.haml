@@ -1,0 +1,4 @@
+#lists
+  -content_for :javascript do
+    new TodoList.Routers.AppRouter({lists: #{ @lists.to_json.html_safe}, project_lists:#{ @project_lists.to_json.html_safe}})
+    Backbone.history.start()

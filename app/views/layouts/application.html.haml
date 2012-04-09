@@ -1,0 +1,45 @@
+%html
+  %head
+    %title
+      = TodoList
+    = render 'layouts/stylesheets'
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+
+  %body
+    .navbar
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.brand
+            =TodoList
+          .nav-collapse
+            %ul.nav
+              - if signed_in?
+                %li
+                  = link_to "Home", pages_home_path
+                %li.devider-vertical
+                %li
+                  = link_to "Profile", edit_user_registration_path(current_user)
+                %li.devider-vertical
+                %li
+                  = link_to "Projects", '/#/projects'
+                %li.devider-vertical
+                %li
+                  = link_to "Lists", '/#/lists'
+                %li.devider-vertical
+                %li
+                  = link_to "Sign out", destroy_user_session_path, method: :delete
+    .container
+      .row
+        = yield
+        - if content_for? :javascript
+          %script{:type => "text/javascript"}
+            = yield :javascript
+
+    .footer
+      = debug(params) if Rails.env.development?
+

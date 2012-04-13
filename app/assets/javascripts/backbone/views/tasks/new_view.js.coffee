@@ -10,7 +10,7 @@ class TodoList.Views.Tasks.NewView extends Backbone.View
 
     super(options)
     @model = new @collection.model()
-    @model.url = "/lists/#{@options.list.attributes.id}/tasks"
+
     @model.bind("change:errors", () =>
     this.render()
     )
@@ -22,7 +22,6 @@ class TodoList.Views.Tasks.NewView extends Backbone.View
     @model.unset("errors")
 
     @collection.url = "/lists/#{@options.list.attributes.id}/tasks"
-    @model.attributes.list_id = @options.list.attributes.id
 
     @collection.create(@model.toJSON(),
       success: (task) =>

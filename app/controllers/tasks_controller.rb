@@ -17,18 +17,16 @@ class TasksController < ApplicationController
   end
 
   def create
-    if @task.save
-      #@task.send_email_to(current_user)
+    #@task.send_email_to(current_user)
       respond_to do  |format|
         if @task.save
           format.html { redirect_to list_tasks_path(@list), success: 'Task was successfully created' }
-          format.json { render json: @task, status: :created, location: @task }
+          format.json { render json: @task, status: :created, location: [@list, @task] }
         else
           format.html { render action: "new", error: "Task wasn't created" }
           format.json { render json: @task.errors, status: :unprocessable_entity }
         end
       end
-    end
   end
 
   def edit

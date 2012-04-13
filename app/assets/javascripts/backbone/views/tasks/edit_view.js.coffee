@@ -9,11 +9,10 @@ class TodoList.Views.Tasks.EditView extends Backbone.View
   update : (e) ->
     e.preventDefault()
     e.stopPropagation()
-
+    @model.url = "/lists/#{@options.list.attributes.id}/tasks/#{@model.id}"
     @model.save(null,
       success : (task) =>
         @model = task
-        @collection.url = "/lists/#{@options.list.attributes.id}/tasks"
         window.location.hash = "/lists/#{@options.list.attributes.id}/tasks"
 
     )

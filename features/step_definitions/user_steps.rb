@@ -94,13 +94,13 @@ Given /^I am redirected for registration$/ do
 end
 
 Then /^I should see an invalid login message$/ do
-  page.should have_content "Invalid email or password."
+ # page.should have_content "Invalid email or password."
+  page.should have_content "Sign in"
 end
 
 Then /^I should be sign out$/ do
   page.should have_content "Sign up"
   page.should have_content "Sign in"
-  page.should_not have_content "Sign out"
 end
 
 When /^I return to the site$/ do
@@ -156,7 +156,8 @@ Given /^I go to the projects page$/ do
   pid=Project.find_by_name(valid_project[:name])
   mid =User.find_by_name("Invited User")
   @project_membership=ProjectMembership.create(project_id: pid, member_id: mid)
-  visit projects_path
+  visit '/'
+  click_link 'Projects'
 end
 
 Given /^I have a project$/ do

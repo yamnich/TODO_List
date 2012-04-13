@@ -11,4 +11,4 @@ Feature: Ability to delete list
   @selenium,@javascript
   Scenario: User can delete the list
     When I delete list
-    Then I should see an success message "List was successfully deleted"
+    Then I should not see list

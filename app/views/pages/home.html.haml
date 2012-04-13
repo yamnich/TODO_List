@@ -1,25 +1,10 @@
-- if !(user_signed_in?)
-  =render  file: 'devise/sessions/new'
--else
+- if signed_in?
   #app
-    - content_for :javascript do
-      new TodoList.Routers.AppRouter({projects: #{ @projects.to_json.html_safe },
-      lists: #{ @lists.to_json.html_safe },
-      projects_invited_in: #{ @projects_invited_in.to_json.html_safe },
-      tasks: #{@tasks.to_json.html_safe} })
-      Backbone.history.start()
-  .span2.columns.text
-    = gravatar_for(current_user, :size => 70)
-  %h1
-    = current_user.name
-  .span3.columns.text
-    %p
-      = "Today I have"
-      = link_to  pluralize(current_user.own_projects.count,"Project"), "/#/projects"
-      = "and"
-      = link_to  pluralize(current_user.lists.count,"List"), "/#/lists"
-    %p
-      = "I should done " + pluralize( current_user.tasks.count,"task")
-    %p
-      =  "I'm pacticipating'in "
-      = link_to pluralize(current_user.projects.count, "project") ,"/#/projects"
+  - content_for :javascript do
+    new TodoList.Routers.AppRouter({projects: #{ @projects.to_json.html_safe },
+    lists: #{ @lists.to_json.html_safe },
+    projects_invited_in: #{ @projects_invited_in.to_json.html_safe },
+    tasks: #{@tasks.to_json.html_safe} ,user: #{ current_user.to_json.html_safe}})
+    Backbone.history.start()
+-else
+  =render  file: 'devise/sessions/new'

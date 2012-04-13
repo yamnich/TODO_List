@@ -3,22 +3,23 @@ def valid_task
 end
 
 def create_task task
-  fill_in "Name", with: task[:name]
-  click_button "New"
+  fill_in "name", with: task[:name]
+  click_button "Create Task"
 end
 
 def update_task name
-  fill_in "Name", with: name
-  click_button "Update"
+  fill_in "name", with: name
+  click_button "Update Task"
 end
 
 
 When /^I go to the tasks page$/ do
-  visit list_tasks_path(@list)
+  click_link "Lists"
+  click_link @list.name
 end
 
 When /^I go to the new task page$/ do
-  click_link "Add the task"
+  click_link "New task"
 end
 
 When /^I create new task with valid data$/ do
@@ -35,7 +36,8 @@ Given /^I have a task$/ do
 end
 
 Given /^I go to task edit page$/ do
- click_link "Edit task"
+  find('.btn.btn-info.dropdown-toggle').click
+  click_link("Edit task")
 end
 
 When /^I update task with valid data$/ do
@@ -52,7 +54,7 @@ When /^I delete the task$/ do
 end
 
 When /^I change the task state$/ do
-  click_link "in work"
+  click_link "in_work"
 end
 
 Then /^I should see changed task state$/ do

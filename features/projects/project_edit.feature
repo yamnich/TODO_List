@@ -1,3 +1,4 @@
+@selenium,@javascript
 Feature: Ability to edit project
   As an existing user
   I should be able to edit my projects
@@ -10,8 +11,8 @@ Feature: Ability to edit project
 
   Scenario: User can edit the project details with valid data
     When I update project with valid data
-    Then I should see a message "Project was successfully updated"
+    Then I should see a message "New project"
 
   Scenario: User can't edit the project details with invalid data
     When I update project with invalid data
-    Then I should see a message "Project wasn't updated"
+    Then I should see an input field

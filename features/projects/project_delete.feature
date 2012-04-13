@@ -11,4 +11,4 @@ Feature: Ability to delete project
   @selenium,@javascript
   Scenario: User can delete the project
     When I delete project
-    Then I should see an success message "Project was successfully deleted"
+    Then I should not see a project_name

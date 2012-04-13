@@ -6,6 +6,9 @@ Feature: Creation of new task
     Given I exist as a user
     And  I sign in with valid data
     And I have a list
+    And I go to the new list page
+    And I create new list with valid data
+
 
   @selenium,@javascript
   Scenario: Authorized user can create task with valid data

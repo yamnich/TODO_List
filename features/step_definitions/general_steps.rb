@@ -13,3 +13,7 @@ Then /^(?:|I )should see a message "([^"]*)"$/ do |text|
     assert page.has_content?(text)
   end
 end
+
+Then /^I should see a "([^"]*)"$/ do |arg1|
+  page.should have_content arg1
+end
